@@ -16,7 +16,8 @@
     <meta property="og:image" content="assets/hero-dashboard.png">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/hero-dashboard.png" as="image">
-    <link rel="stylesheet" href="styles.css">
+    <script src="theme.js?v=95.0"></script>
+    <link rel="stylesheet" href="styles.css?v=95.0">
   </head>
   <body>
     <header class="site-header">
@@ -29,6 +30,28 @@
       </nav>
       <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+      <div class="header-tools" aria-label="Account, version, and display">
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-button" type="button" data-account-toggle aria-expanded="false" aria-label="Account menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="9" cy="10" r="1"></circle>
+              <circle cx="15" cy="10" r="1"></circle>
+              <path d="M8.5 14.5c1.1 1.2 2.3 1.8 3.5 1.8s2.4-.6 3.5-1.8"></path>
+            </svg>
+          </button>
+          <div class="account-panel" data-account-panel hidden>
+            <p class="mini-label">Signed in</p>
+            <strong data-account-label>Client</strong>
+            <button class="account-logout" type="button" data-account-logout>Log out</button>
+          </div>
+        </div>
+        <span class="version-chip" data-site-version>v95.0</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span>Day</span>
+          <span>Night</span>
+        </button>
+      </div>
     </header>
 
     <main id="top">
@@ -36,25 +59,24 @@
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow">From ambitious workbook to advisor-ready web app</p>
+          <p class="eyebrow">Scenario tax planning for owner-led clients</p>
           <h1 id="hero-title">KellyO</h1>
           <p class="hero-copy">
-            Scenario tax planning for CPAs and advisors who need to compare S corp elections,
-            retirement moves, PTET, real estate strategies, and quarterly payments without
-            wrangling a 32-tab spreadsheet in front of a client.
+            Compare entity, retirement, PTET, real estate, and quarterly payment strategies
+            in one guided workflow built for professional judgment.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button primary" href="#engine">See the product shape</a>
+            <a class="button primary" href="#engine">See the planning flow</a>
             <a class="button secondary" href="./gate.html">Client login</a>
           </div>
-          <dl class="hero-metrics" aria-label="Workbook conversion snapshot">
+          <dl class="hero-metrics" aria-label="Planning workspace snapshot">
             <div>
               <dt>32</dt>
-              <dd>Workbook tabs mapped</dd>
+              <dd>Planning modules</dd>
             </div>
             <div>
               <dt>1,221</dt>
-              <dd>Formula cells to test</dd>
+              <dd>Calculation rules</dd>
             </div>
             <div>
               <dt>3</dt>
@@ -74,18 +96,18 @@
           <strong>Planning estimates, not tax filing</strong>
         </div>
         <div>
-          <span class="label">First buyer</span>
+          <span class="label">Built for</span>
           <strong>Professionals serving high-income owner clients</strong>
         </div>
       </section>
 
       <section class="section product-section" id="engine" aria-labelledby="engine-title">
-        <div class="section-kicker">Product springboard</div>
+        <div class="section-kicker">Planning workspace</div>
         <div class="section-heading">
-          <h2 id="engine-title">A planning workspace, not a spreadsheet clone.</h2>
+          <h2 id="engine-title">Guided planning instead of spreadsheet wrangling.</h2>
           <p>
-            The first app should preserve the workbook's calculation depth while replacing
-            tabs, toggles, and hidden dependencies with a guided client conversation.
+            KellyO organizes client facts, strategy choices, and estimate outputs in one
+            advisor-led workflow, so every scenario has clear assumptions and next steps.
           </p>
         </div>
 
@@ -132,12 +154,12 @@
 
           <div class="decision-panel">
             <p class="mini-label">Advisor flow</p>
-            <h3>Turn each tab into a clean decision.</h3>
+            <h3>Turn complex planning into clean decisions.</h3>
             <ul class="check-list">
               <li>Capture assumptions once in a client profile.</li>
               <li>Apply strategies as named scenario modules.</li>
               <li>Show tax before, tax after, and quarter-by-quarter due dates.</li>
-              <li>Export a client-ready report with caveats and source notes.</li>
+              <li>Export a client-ready report with caveats and method notes.</li>
             </ul>
           </div>
         </div>
@@ -146,10 +168,10 @@
       <section class="section muted" id="strategies" aria-labelledby="strategy-title">
         <div class="section-kicker">Modules</div>
         <div class="section-heading">
-          <h2 id="strategy-title">Start with the strategies Kelly can validate fastest.</h2>
+          <h2 id="strategy-title">Start with the strategies advisors use most.</h2>
           <p>
-            The workbook has enough depth for a broad platform, but the first release should
-            prove the scenario engine with a focused set of high-value planning moves.
+            KellyO brings high-value advisory moves into one workspace, with enough structure
+            to compare options and enough context to keep the conversation practical.
           </p>
         </div>
 
@@ -187,77 +209,60 @@
         </div>
       </section>
 
-      <section class="section economics" id="pricing" aria-labelledby="pricing-title">
-        <div class="section-kicker">Commercial shape</div>
-        <div class="section-heading">
-          <h2 id="pricing-title">Monetize the professional workflow first.</h2>
+      <section class="section preview" id="preview" aria-labelledby="preview-title">
+        <div class="preview-copy">
+          <div class="section-kicker">Private evaluation</div>
+          <h2 id="preview-title">See whether KellyO fits your planning practice.</h2>
           <p>
-            Free calculators can attract traffic, but paid value lives in saved clients,
-            repeatable scenarios, defensible assumptions, and polished reports.
+            Start with a protected workspace for scenario planning, assumptions, quarterly
+            estimates, and advisor-ready reports.
+          </p>
+          <p>
+            Trial access is meant for professionals who want to evaluate the workflow before
+            using it with live client planning.
           </p>
         </div>
-
-        <div class="pricing-grid">
+        <div class="preview-card">
+          <p class="mini-label">30-day trial</p>
+          <h3>Explore the protected planning workspace.</h3>
+          <p>
+            Request trial access, sign in as a client, and review how KellyO turns planning
+            assumptions into side-by-side scenarios.
+          </p>
+          <a class="button primary" href="./trial.html">Request trial access</a>
+        </div>
+        <div class="trial-plan-row" aria-label="Plan options">
           <article class="pricing-plan">
             <p class="mini-label">Starter</p>
             <h3>$49/mo</h3>
-            <p>Solo advisor experimenting with quarterly estimates and a few strategy modules.</p>
+            <p>For solo advisors testing quarterly estimates and focused strategy modules.</p>
           </article>
           <article class="pricing-plan featured">
             <p class="mini-label">Practice</p>
             <h3>$199/mo</h3>
-            <p>Saved clients, scenario comparisons, PDF reports, and professional disclaimers.</p>
+            <p>For practices that need saved clients, scenario comparisons, and report-ready outputs.</p>
           </article>
           <article class="pricing-plan">
             <p class="mini-label">Firm</p>
             <h3>$699+/mo</h3>
-            <p>Team seats, audit logs, review workflows, and custom reporting templates.</p>
+            <p>For firms that want team seats, review workflows, and custom reporting templates.</p>
           </article>
         </div>
-      </section>
-
-      <section class="section preview" id="preview" aria-labelledby="preview-title">
-        <div class="preview-copy">
-          <div class="section-kicker">Kelly review</div>
-          <h2 id="preview-title">Use this as the first conversation piece.</h2>
-          <p>
-            The first review should answer three questions: what would a CPA trust, what
-            should never be automated blindly, and which client scenario is worth building first?
-          </p>
-          <p>
-            Kelly can comment in the shared GitHub thread, or use the email draft below if that is easier.
-          </p>
-        </div>
-        <form class="preview-form" id="preview-form">
-          <label>
-            <span>Name</span>
-            <input name="name" type="text" value="Kelly Cohen">
-          </label>
-          <label>
-            <span>Review focus</span>
-            <select name="focus">
-              <option>CPA validation of scenario logic</option>
-              <option>Which strategy modules should be first</option>
-              <option>Client report format</option>
-              <option>Pricing and buyer persona</option>
-            </select>
-          </label>
-          <label>
-            <span>Notes</span>
-            <textarea name="notes" rows="4">Let's review the scenario comparison flow and decide what has to be true for a CPA to trust it.</textarea>
-          </label>
-          <button class="button primary" type="submit">Draft review email</button>
-        </form>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>KellyO</span>
       <span>Planning estimates only. Not tax filing software.</span>
-      <span>Built from the 2026 quarterly tax workbook.</span>
+      <span>Built for advisor-led planning conversations.</span>
     </footer>
 
-    <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="app.js"></script>
+    <script src="owner-nav.js?v=95.0"></script>
+    <script src="version.js?v=95.0"></script>
+    <script src="gate-access.js?v=95.0"></script>
+    <script>
+      window.KellyOGateAccess.bindAccountMenu();
+    </script>
+    <script src="app.js?v=95.0"></script>
   </body>
 </html>

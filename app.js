@@ -41,7 +41,7 @@ tabs.forEach((tab) => {
   });
 });
 
-document.getElementById("preview-form").addEventListener("submit", (event) => {
+document.getElementById("preview-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const subject = encodeURIComponent("KellyO first-look review");

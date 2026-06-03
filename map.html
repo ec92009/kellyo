@@ -9,10 +9,11 @@
       content="Map the source quarterly tax workbook into KellyO web app modules, test priorities, and CPA review questions."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css">
+    <script src="theme.js?v=95.0"></script>
+    <link rel="stylesheet" href="styles.css?v=95.0">
   </head>
   <body class="is-access-pending">
-    <script src="gate-access.js?v=client-gate"></script>
+    <script src="gate-access.js?v=95.0"></script>
     <script>
       window.KellyOGateAccess.requireAccess({ redirectUrl: "./gate.html?next=map" });
     </script>
@@ -26,6 +27,28 @@
       </nav>
       <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+      <div class="header-tools" aria-label="Account, version, and display">
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-button" type="button" data-account-toggle aria-expanded="false" aria-label="Account menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="9" cy="10" r="1"></circle>
+              <circle cx="15" cy="10" r="1"></circle>
+              <path d="M8.5 14.5c1.1 1.2 2.3 1.8 3.5 1.8s2.4-.6 3.5-1.8"></path>
+            </svg>
+          </button>
+          <div class="account-panel" data-account-panel hidden>
+            <p class="mini-label">Signed in</p>
+            <strong data-account-label>Client</strong>
+            <button class="account-logout" type="button" data-account-logout>Log out</button>
+          </div>
+        </div>
+        <span class="version-chip" data-site-version>v95.0</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span>Day</span>
+          <span>Night</span>
+        </button>
+      </div>
     </header>
 
     <main class="map-page">
@@ -40,23 +63,71 @@
           </p>
         </div>
         <div class="map-status-panel">
-          <p class="mini-label">Current truth</p>
-          <h2>Not a full tax engine yet.</h2>
+          <p class="mini-label">Protected workspace</p>
+          <h2>Quick Calc is the first active slice.</h2>
           <p>
-            The workbook is the source model. Quick Calc is the first executable slice;
-            the full quarterly engine still needs formula ports and golden tests.
+            Use the module map and Quick Calc alpha to explore how the workbook is becoming
+            a structured planning workflow.
           </p>
           <div class="gate-actions">
             <a class="button primary" href="#engine-alpha">Try engine alpha</a>
-            <a class="button primary" href="#qa-path">Review test path</a>
-            <a class="button secondary dark" href="./gate.html">Client gate</a>
+            <a class="button secondary dark" href="./gate.html">Client login</a>
           </div>
+        </div>
+      </section>
+
+      <section class="status-warning-panel" aria-labelledby="map-status-title">
+        <div class="status-warning-summary">
+          <div>
+            <p class="section-kicker">Important status</p>
+            <h2 id="map-status-title">Not a full tax engine yet.</h2>
+            <p>
+              The workbook remains the source model. KellyO is ready for guided review,
+              not unattended tax planning.
+            </p>
+          </div>
+          <button
+            class="info-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="map-status-details"
+            data-status-toggle
+          >
+            <span aria-hidden="true">i</span>
+            <span class="sr-only">Show product status details</span>
+          </button>
+        </div>
+        <div class="status-warning-details" id="map-status-details" hidden>
+          <article>
+            <h3>What works</h3>
+            <ul>
+              <li>Protected workbook map loads after client sign-in.</li>
+              <li>Quick Calc alpha runs in the browser.</li>
+              <li>Workbook tabs are mapped into product modules.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>What's under test</h3>
+            <ul>
+              <li>Federal ordinary tax and capital-gains stacking behavior.</li>
+              <li>State-tax approximations for selected states.</li>
+              <li>Workbook parity tests for CPA acceptance scenarios.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Not started yet</h3>
+            <ul>
+              <li>Full quarterly estimate engine.</li>
+              <li>Saved client scenarios and account history.</li>
+              <li>Advisor report export and paid account access.</li>
+            </ul>
+          </article>
         </div>
       </section>
 
       <section class="gated-workspace" id="gated-workspace" aria-labelledby="workspace-title">
         <div>
-          <p class="mini-label">Reviewer-only mock</p>
+          <p class="mini-label">Protected workspace</p>
           <h2 id="workspace-title">Engine alpha workspace</h2>
           <p id="workspace-copy">
             Quick Calc is now running as the first browser-side formula port. Full scenario
@@ -176,40 +247,6 @@
         </div>
       </section>
 
-      <section class="section map-section" id="qa-path" aria-labelledby="qa-title">
-        <div class="section-kicker">Kelly test path</div>
-        <div class="section-heading">
-          <h2 id="qa-title">What she can test first.</h2>
-          <p>
-            The first CPA review should focus on trust boundaries: assumptions, caveats,
-            module order, and golden scenarios that the future web engine must match.
-          </p>
-        </div>
-
-        <div class="qa-grid">
-          <article>
-            <span>01</span>
-            <h3>Validate the map</h3>
-            <p>Confirm every workbook tab is assigned to the right web module, buyer workflow, and priority.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Add golden scenarios</h3>
-            <p>Expand the QA Scenario Tests rows with cases Kelly would use to trust or reject the engine.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Mark dangerous automation</h3>
-            <p>Identify strategies that require human review, substantiation, or stronger disclaimers.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Approve the MVP order</h3>
-            <p>Choose which V1 modules are sellable first and which ones should stay as future backlog.</p>
-          </article>
-        </div>
-      </section>
-
       <section class="section muted map-section" aria-labelledby="module-title">
         <div class="section-kicker">Tab-to-module map</div>
         <div class="section-heading map-controls-heading">
@@ -231,27 +268,21 @@
         <div id="module-grid" class="module-grid" aria-live="polite"></div>
       </section>
 
-      <section class="section map-section" aria-labelledby="scenario-title">
-        <div class="section-kicker">Golden tests</div>
-        <div class="section-heading">
-          <h2 id="scenario-title">Workbook scenarios become acceptance tests.</h2>
-          <p>
-            These rows are pulled from the workbook's QA Scenario Tests tab. The web engine
-            should reproduce these outcomes before we let anyone rely on calculated outputs.
-          </p>
-        </div>
-        <div id="scenario-list" class="scenario-list"></div>
-      </section>
     </main>
 
     <footer class="site-footer">
       <span>KellyO</span>
       <span>Workbook map only. Calculations not live yet.</span>
-      <span>Protected by the mock client gate.</span>
+      <span>Protected by client sign-in.</span>
     </footer>
 
-    <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="tax-engine.js?v=quick-alpha"></script>
-    <script src="map.js?v=quick-alpha"></script>
+    <script src="owner-nav.js?v=95.0"></script>
+    <script src="version.js?v=95.0"></script>
+    <script src="status-panel.js?v=95.0"></script>
+    <script src="tax-engine.js?v=95.0"></script>
+    <script src="map.js?v=95.0"></script>
+    <script>
+      window.KellyOGateAccess.bindAccountMenu();
+    </script>
   </body>
 </html>

@@ -91,7 +91,6 @@ function renderModules() {
               <ul>${(sheet.outputs || []).map((item) => `<li>${item}</li>`).join("")}</ul>
             </div>
           </div>
-          <p class="test-focus">${sheet.testFocus}</p>
         </article>
       `
     )
@@ -191,7 +190,7 @@ async function bindQuickCalc() {
 function hydrateAccessState() {
   const access = window.KellyOGateAccess.getAccess();
   if (!access) return;
-  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Quick Calc is available for review; full scenario calculations remain withheld until the workbook formulas are ported and CPA-tested.`;
+  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Quick Calc is available for guided review. Full scenario calculations remain locked until workbook parity checks are complete.`;
 }
 
 async function loadWorkbookMap() {
@@ -200,7 +199,6 @@ async function loadWorkbookMap() {
   hydrateAccessState();
   setSummary(workbookData.summary);
   renderModules();
-  renderScenarios();
   bindControls();
   await bindQuickCalc();
 }

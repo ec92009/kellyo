@@ -6,10 +6,11 @@
     <title>KellyO | Client Access</title>
     <meta
       name="description"
-      content="Clean KellyO mock client gate for reviewer access and paywall discussion."
+      content="KellyO client access for protected tax-planning scenario tools."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=client-gate">
+    <script src="theme.js?v=95.0"></script>
+    <link rel="stylesheet" href="styles.css?v=95.0">
   </head>
   <body>
     <header class="site-header">
@@ -22,36 +23,57 @@
       </nav>
       <a class="client-cta" href="./gate.html" aria-current="page">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+      <div class="header-tools" aria-label="Account, version, and display">
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-button" type="button" data-account-toggle aria-expanded="false" aria-label="Account menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="9" cy="10" r="1"></circle>
+              <circle cx="15" cy="10" r="1"></circle>
+              <path d="M8.5 14.5c1.1 1.2 2.3 1.8 3.5 1.8s2.4-.6 3.5-1.8"></path>
+            </svg>
+          </button>
+          <div class="account-panel" data-account-panel hidden>
+            <p class="mini-label">Signed in</p>
+            <strong data-account-label>Client</strong>
+            <button class="account-logout" type="button" data-account-logout>Log out</button>
+          </div>
+        </div>
+        <span class="version-chip" data-site-version>v95.0</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span>Day</span>
+          <span>Night</span>
+        </button>
+      </div>
     </header>
 
     <main class="client-page">
       <section class="client-hero">
         <div class="client-hero-copy">
           <p class="eyebrow">Client access</p>
-          <h1>KellyO gate</h1>
+          <h1>KellyO client login</h1>
           <p>
-            A clean reviewer entry point for testing how clients would reach protected
-            calculation tools. The gate is still a mock paywall while the workbook formulas
-            are being ported and checked.
+            Sign in to reach the protected planning workspace for scenario inputs,
+            estimate review, and advisor-ready outputs.
           </p>
         </div>
         <div class="client-status-panel">
-          <p class="mini-label">Reviewer preview</p>
-          <h2>Credentials open the test lab only.</h2>
+          <p class="mini-label">Protected workspace</p>
+          <h2>Credentials open the planning area.</h2>
           <p>
-            Passing this gate reveals the protected workspace placeholder. It does not make
-            any tax calculation live or reliable yet.
+            After sign-in, clients can preview the guarded workflow and move into the
+            scenario workspace.
           </p>
         </div>
       </section>
 
       <section class="calc-gate client-gate" id="gate" aria-labelledby="gate-title">
         <div class="gate-copy">
-          <p class="section-kicker">Mock paywall</p>
+          <p class="section-kicker">Client sign-in</p>
           <h2 id="gate-title">Enter client credentials.</h2>
           <p>
-            Kelly can use this page to test the first access flow without landing inside the
-            workbook map. Owner-managed localhost passwords are used when the mini server is running.
+            Use the client username and password assigned by the KellyO owner to open
+            the protected planning area.
           </p>
         </div>
         <form class="gate-form" id="gate-form">
@@ -61,21 +83,22 @@
           </label>
           <label>
             <span>Password</span>
-            <input name="password" type="password" placeholder="Paywall password" autocomplete="current-password">
+            <input name="password" type="password" placeholder="Password" autocomplete="current-password">
           </label>
-          <button class="button primary" type="submit">Pass mock paywall</button>
+          <button class="button primary" type="submit">Sign in</button>
           <p id="gate-message" class="gate-message" aria-live="polite">Client username and password required.</p>
           <div class="trial-cta" data-trial-cta>
             <div>
               <span>No credentials yet?</span>
               <strong>Try now free for 30 days.</strong>
             </div>
-            <a
+            <button
               class="button secondary dark"
-              href="./trial.html"
+              type="button"
+              data-trial-modal-open
             >
               Try now free for 30 days
-            </a>
+            </button>
           </div>
           <div class="gate-success-actions" data-gate-success hidden>
             <a class="button secondary dark" id="enter-paywall" href="./map.html">Enter protected workspace</a>
@@ -83,13 +106,108 @@
         </form>
       </section>
 
+      <section class="status-warning-panel" aria-labelledby="gate-status-title">
+        <div class="status-warning-summary">
+          <div>
+            <p class="section-kicker">Important status</p>
+            <h2 id="gate-status-title">Not a full tax engine yet.</h2>
+            <p>
+              KellyO is open for early review. Estimates and reports require professional
+              review before client use.
+            </p>
+          </div>
+          <button
+            class="info-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="gate-status-details"
+            data-status-toggle
+          >
+            <span aria-hidden="true">i</span>
+            <span class="sr-only">Show product status details</span>
+          </button>
+        </div>
+        <div class="status-warning-details" id="gate-status-details" hidden>
+          <article>
+            <h3>What works</h3>
+            <ul>
+              <li>Public preview page and trial request flow.</li>
+              <li>Client sign-in flow for the protected workspace.</li>
+              <li>Owner-managed local client credentials.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>What's under test</h3>
+            <ul>
+              <li>Quick Calc alpha behind the client gate.</li>
+              <li>Workbook-to-web module map.</li>
+              <li>CPA acceptance scenarios and workbook parity checks.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Not started yet</h3>
+            <ul>
+              <li>Production authentication and paid account billing.</li>
+              <li>Full quarterly tax engine.</li>
+              <li>Client-ready report generation.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="kelly-review-panel" id="kelly-review-panel" aria-labelledby="kelly-review-title" hidden>
+        <div class="review-panel-heading">
+          <div>
+            <p class="section-kicker">Kelly Only</p>
+            <h2 id="kelly-review-title">Private review board.</h2>
+            <p>
+              Questions, caveats, open decisions, and review tasks for Kelly's eyes only.
+              This panel stays out of the public-facing pages.
+            </p>
+          </div>
+          <a class="button primary" href="./map.html">Enter protected workspace</a>
+        </div>
+
+        <div class="review-panel-grid">
+          <article>
+            <h3>State of affairs</h3>
+            <ul class="state-list">
+              <li><strong>Public page:</strong> visitor-facing product preview.</li>
+              <li><strong>Client access:</strong> login opens the protected workspace.</li>
+              <li><strong>Engine:</strong> Quick Calc alpha is running behind the gate.</li>
+              <li><strong>Next proof:</strong> workbook parity tests and CPA acceptance cases.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Review checklist</h3>
+            <div class="review-checklist">
+              <label><input type="checkbox" data-kelly-note="positioning"> Public positioning feels right.</label>
+              <label><input type="checkbox" data-kelly-note="client-flow"> Client login flow makes sense.</label>
+              <label><input type="checkbox" data-kelly-note="quick-calc"> Quick Calc examples are worth testing.</label>
+              <label><input type="checkbox" data-kelly-note="golden-cases"> Three golden scenarios are selected.</label>
+              <label><input type="checkbox" data-kelly-note="risk-flags"> Risky automation areas are flagged.</label>
+            </div>
+          </article>
+
+          <article>
+            <h3>Questions for Kelly</h3>
+            <ol class="question-list">
+              <li>Which client profile should the first paid workflow serve?</li>
+              <li>Which workbook outputs must match exactly before launch?</li>
+              <li>Which planning strategies should require human approval?</li>
+              <li>What language would make the caveats feel professionally safe?</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
       <section class="gated-workspace client-workspace is-locked" id="gated-workspace" aria-labelledby="workspace-title">
         <div>
           <p class="mini-label">Protected preview</p>
           <h2 id="workspace-title">Client calculation workspace</h2>
           <p id="workspace-copy">
-            This is where the client-facing scenario tools will appear after the formula
-            engine is ported, tested, and approved for CPA review.
+            Sign in to preview the protected scenario workspace and planning outputs.
           </p>
         </div>
         <div class="locked-panels" aria-label="Client workspace status">
@@ -101,27 +219,65 @@
           <article>
             <span>Locked</span>
             <h3>Tax estimates</h3>
-            <p>Calculations wait for golden-test approval.</p>
+            <p>Planning estimates remain behind client access.</p>
           </article>
           <article>
-            <span>Review</span>
+            <span>Locked</span>
             <h3>Advisor report</h3>
-            <p>Client-ready outputs stay behind the gate.</p>
+            <p>Report outputs are available only after sign-in.</p>
           </article>
         </div>
       </section>
     </main>
 
+    <dialog class="trial-modal" id="trial-modal" aria-labelledby="trial-modal-title">
+      <div class="trial-modal-shell">
+        <div class="trial-modal-top">
+          <p class="section-kicker">No credentials yet?</p>
+          <button class="icon-button" type="button" data-trial-modal-close aria-label="Close trial options">x</button>
+        </div>
+        <div class="preview-card trial-modal-card">
+          <p class="mini-label">30-day trial</p>
+          <h2 id="trial-modal-title">Explore the protected planning workspace.</h2>
+          <p>
+            Request trial access, sign in as a client, and review how KellyO turns planning
+            assumptions into side-by-side scenarios.
+          </p>
+          <a class="button primary" href="./trial.html">Request trial access</a>
+        </div>
+        <div class="trial-plan-row" aria-label="Plan options">
+          <article class="pricing-plan">
+            <p class="mini-label">Starter</p>
+            <h3>$49/mo</h3>
+            <p>For solo advisors testing quarterly estimates and focused strategy modules.</p>
+          </article>
+          <article class="pricing-plan featured">
+            <p class="mini-label">Practice</p>
+            <h3>$199/mo</h3>
+            <p>For practices that need saved clients, scenario comparisons, and report-ready outputs.</p>
+          </article>
+          <article class="pricing-plan">
+            <p class="mini-label">Firm</p>
+            <h3>$699+/mo</h3>
+            <p>For firms that want team seats, review workflows, and custom reporting templates.</p>
+          </article>
+        </div>
+      </div>
+    </dialog>
+
     <footer class="site-footer">
       <span>KellyO</span>
-      <span>Mock client access only. Calculations not live yet.</span>
+      <span>Client access for protected planning workflows.</span>
       <span>Protected workspace opens after login.</span>
     </footer>
 
-    <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="gate-access.js?v=client-gate"></script>
+    <script src="owner-nav.js?v=95.0"></script>
+    <script src="version.js?v=95.0"></script>
+    <script src="status-panel.js?v=95.0"></script>
+    <script src="gate-access.js?v=95.0"></script>
     <script>
       window.KellyOGateAccess.bindGate({ successLinkId: "enter-paywall" });
+      window.KellyOGateAccess.bindAccountMenu();
     </script>
   </body>
 </html>

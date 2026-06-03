@@ -9,7 +9,8 @@
       content="Request a 30-day KellyO trial for CPA-ready tax planning scenario previews."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=trial">
+    <script src="theme.js?v=95.0"></script>
+    <link rel="stylesheet" href="styles.css?v=95.0">
   </head>
   <body>
     <header class="site-header">
@@ -22,6 +23,28 @@
       </nav>
       <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+      <div class="header-tools" aria-label="Account, version, and display">
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-button" type="button" data-account-toggle aria-expanded="false" aria-label="Account menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="9" cy="10" r="1"></circle>
+              <circle cx="15" cy="10" r="1"></circle>
+              <path d="M8.5 14.5c1.1 1.2 2.3 1.8 3.5 1.8s2.4-.6 3.5-1.8"></path>
+            </svg>
+          </button>
+          <div class="account-panel" data-account-panel hidden>
+            <p class="mini-label">Signed in</p>
+            <strong data-account-label>Client</strong>
+            <button class="account-logout" type="button" data-account-logout>Log out</button>
+          </div>
+        </div>
+        <span class="version-chip" data-site-version>v95.0</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span>Day</span>
+          <span>Night</span>
+        </button>
+      </div>
     </header>
 
     <main class="trial-page">
@@ -30,8 +53,8 @@
           <p class="eyebrow">30-day trial</p>
           <h1 id="trial-title">Try KellyO free.</h1>
           <p>
-            Start with a reviewer account for the protected planning workspace. The trial
-            is still a product preview while the workbook engine is being validated.
+            Start with a protected planning workspace for scenario review, estimate
+            exploration, and advisor workflow feedback.
           </p>
           <div class="trial-proof">
             <article>
@@ -40,7 +63,7 @@
             </article>
             <article>
               <span>02</span>
-              <strong>Review CPA-facing assumptions</strong>
+              <strong>Compare planning assumptions</strong>
             </article>
             <article>
               <span>03</span>
@@ -80,15 +103,70 @@
           <p class="trial-message" id="trial-message" aria-live="polite"></p>
         </form>
       </section>
+
+      <section class="status-warning-panel" aria-labelledby="trial-status-title">
+        <div class="status-warning-summary">
+          <div>
+            <p class="section-kicker">Important status</p>
+            <h2 id="trial-status-title">Not a full tax engine yet.</h2>
+            <p>
+              Trial access opens an early planning workflow. Professional review is still
+              required before relying on any output.
+            </p>
+          </div>
+          <button
+            class="info-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="trial-status-details"
+            data-status-toggle
+          >
+            <span aria-hidden="true">i</span>
+            <span class="sr-only">Show product status details</span>
+          </button>
+        </div>
+        <div class="status-warning-details" id="trial-status-details" hidden>
+          <article>
+            <h3>What works</h3>
+            <ul>
+              <li>Trial request form opens an email draft.</li>
+              <li>Client login can open a protected workspace.</li>
+              <li>Quick Calc alpha is available after access.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>What's under test</h3>
+            <ul>
+              <li>Which trial flow creates the best first impression.</li>
+              <li>Which scenario examples best fit advisor workflows.</li>
+              <li>Which outputs should be included in a first report.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Not started yet</h3>
+            <ul>
+              <li>Automatic account creation.</li>
+              <li>Subscription billing.</li>
+              <li>Production onboarding emails.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <span>KellyO</span>
-      <span>Trial access is a preview, not live tax software.</span>
+      <span>Trial access is for planning workflow review.</span>
       <span><a href="./gate.html">Already have credentials?</a></span>
     </footer>
 
-    <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="trial.js?v=trial"></script>
+    <script src="owner-nav.js?v=95.0"></script>
+    <script src="version.js?v=95.0"></script>
+    <script src="status-panel.js?v=95.0"></script>
+    <script src="gate-access.js?v=95.0"></script>
+    <script src="trial.js?v=95.0"></script>
+    <script>
+      window.KellyOGateAccess.bindAccountMenu();
+    </script>
   </body>
 </html>

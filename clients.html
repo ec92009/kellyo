@@ -9,7 +9,8 @@
       content="Local-only KellyO owner console for reviewer and client access credentials."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=owner-actions">
+    <script src="theme.js?v=95.0"></script>
+    <link rel="stylesheet" href="styles.css?v=95.0">
   </head>
   <body>
     <header class="site-header">
@@ -22,6 +23,28 @@
       </nav>
       <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link aria-current="page" hidden>Owner</a>
+      <div class="header-tools" aria-label="Account, version, and display">
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-button" type="button" data-account-toggle aria-expanded="false" aria-label="Account menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="9" cy="10" r="1"></circle>
+              <circle cx="15" cy="10" r="1"></circle>
+              <path d="M8.5 14.5c1.1 1.2 2.3 1.8 3.5 1.8s2.4-.6 3.5-1.8"></path>
+            </svg>
+          </button>
+          <div class="account-panel" data-account-panel hidden>
+            <p class="mini-label">Signed in</p>
+            <strong data-account-label>Client</strong>
+            <button class="account-logout" type="button" data-account-logout>Log out</button>
+          </div>
+        </div>
+        <span class="version-chip" data-site-version>v95.0</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span>Day</span>
+          <span>Night</span>
+        </button>
+      </div>
     </header>
 
     <main class="owner-page">
@@ -36,7 +59,7 @@
           </p>
           <div class="owner-exit-actions" aria-label="Owner navigation">
             <a class="button primary" href="./">View public preview</a>
-            <a class="button secondary dark" href="./gate.html">Test paywall</a>
+            <a class="button secondary dark" href="./gate.html">Test client login</a>
             <a class="button secondary dark" href="./map.html">Protected workspace</a>
           </div>
         </div>
@@ -145,7 +168,12 @@
       <span>Public visitors cannot load this table.</span>
     </footer>
 
-    <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="clients.js?v=owner-actions"></script>
+    <script src="owner-nav.js?v=95.0"></script>
+    <script src="version.js?v=95.0"></script>
+    <script src="gate-access.js?v=95.0"></script>
+    <script src="clients.js?v=95.0"></script>
+    <script>
+      window.KellyOGateAccess.bindAccountMenu();
+    </script>
   </body>
 </html>
