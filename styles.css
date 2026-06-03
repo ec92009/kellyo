@@ -964,6 +964,13 @@ textarea {
   margin-bottom: 22px;
 }
 
+.owner-exit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
 .client-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -972,7 +979,7 @@ textarea {
 
 .client-table {
   width: 100%;
-  min-width: 940px;
+  min-width: 1040px;
   border-collapse: collapse;
   background: #fff;
 }
@@ -983,6 +990,68 @@ textarea {
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
+}
+
+.password-editor {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.password-editor input {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.button.mini {
+  min-height: 38px;
+  padding: 0 12px;
+  color: #fff;
+  background: var(--teal);
+}
+
+.button.mini:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-button {
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--teal-dark);
+  background: #fff;
+  cursor: pointer;
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.icon-button.danger {
+  color: var(--berry);
+}
+
+.icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .client-table th {

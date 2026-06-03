@@ -8,7 +8,7 @@
       name="description"
       content="Local-only KellyO owner console for reviewer and client access credentials."
     >
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=owner-actions">
   </head>
   <body>
     <header class="site-header">
@@ -35,6 +35,11 @@
             This page is designed for paywall test credentials and reviewer access notes,
             not public browsing.
           </p>
+          <div class="owner-exit-actions" aria-label="Owner navigation">
+            <a class="button primary" href="./">View public preview</a>
+            <a class="button secondary dark" href="./map.html">Workbook map</a>
+            <a class="button secondary dark" href="./map.html#gate">Test paywall</a>
+          </div>
         </div>
         <div class="owner-mode" id="owner-mode">
           <p class="mini-label">Access mode</p>
@@ -72,6 +77,7 @@
                 <th>Password</th>
                 <th>Status</th>
                 <th>Notes</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="client-rows"></tbody>
@@ -81,7 +87,8 @@
           <h3>Local data boundary</h3>
           <p>
             These entries are loaded from <code>site/data/owner-clients.local.json</code>,
-            which is ignored by Git and not published with the public site.
+            which is ignored by Git and not published with the public site. Password edits
+            are saved by the local KellyO Owner mini server.
           </p>
         </div>
       </section>
@@ -93,7 +100,6 @@
       <span>Public visitors cannot load this table.</span>
     </footer>
 
-    <script src="clients.js"></script>
+    <script src="clients.js?v=owner-actions"></script>
   </body>
 </html>
-
