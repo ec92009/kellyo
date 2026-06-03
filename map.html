@@ -41,12 +41,13 @@
         </div>
         <div class="map-status-panel">
           <p class="mini-label">Current truth</p>
-          <h2>Not a tax engine yet.</h2>
+          <h2>Not a full tax engine yet.</h2>
           <p>
-            The workbook is the source model. KellyO needs a tested calculation engine
-            before any browser output should be treated as tax planning math.
+            The workbook is the source model. Quick Calc is the first executable slice;
+            the full quarterly engine still needs formula ports and golden tests.
           </p>
           <div class="gate-actions">
+            <a class="button primary" href="#engine-alpha">Try engine alpha</a>
             <a class="button primary" href="#qa-path">Review test path</a>
             <a class="button secondary dark" href="./gate.html">Client gate</a>
           </div>
@@ -56,17 +57,17 @@
       <section class="gated-workspace" id="gated-workspace" aria-labelledby="workspace-title">
         <div>
           <p class="mini-label">Reviewer-only mock</p>
-          <h2 id="workspace-title">Test lab placeholder</h2>
+          <h2 id="workspace-title">Engine alpha workspace</h2>
           <p id="workspace-copy">
-            This is where live scenario calculations will appear after the TypeScript engine
-            is built and matched against workbook golden tests.
+            Quick Calc is now running as the first browser-side formula port. Full scenario
+            calculations remain withheld until the workbook formulas are ported and CPA-tested.
           </p>
         </div>
         <div class="locked-panels" aria-label="Calculation status">
           <article>
-            <span>Locked</span>
-            <h3>Core tax engine</h3>
-            <p>Formula port not complete.</p>
+            <span>Alpha</span>
+            <h3>Quick Calc</h3>
+            <p>Federal, LTCG, and state approximation are ported first.</p>
           </article>
           <article>
             <span>Ready</span>
@@ -78,6 +79,81 @@
             <h3>Golden tests</h3>
             <p>Kelly can add CPA acceptance scenarios.</p>
           </article>
+        </div>
+      </section>
+
+      <section class="section engine-alpha-section" id="engine-alpha" aria-labelledby="engine-alpha-title">
+        <div class="section-kicker">Engine alpha</div>
+        <div class="section-heading">
+          <h2 id="engine-alpha-title">Quick Calc is now executable.</h2>
+          <p>
+            This first calculation slice ports the workbook's Quick Calc logic: federal
+            ordinary brackets, long-term capital gains stacking, and state-tax approximation.
+          </p>
+        </div>
+
+        <div class="engine-alpha-grid">
+          <form class="engine-form" id="quick-calc-form">
+            <label>
+              <span>Filing status</span>
+              <select id="qc-status" name="filingStatus"></select>
+            </label>
+            <label>
+              <span>State</span>
+              <select id="qc-state" name="state"></select>
+            </label>
+            <label>
+              <span>Taxable income, ordinary</span>
+              <input id="qc-ordinary" name="ordinaryIncome" type="number" min="0" step="1000" value="100000">
+            </label>
+            <label>
+              <span>LTCG / qualified dividends</span>
+              <input id="qc-ltcg" name="longTermCapitalGains" type="number" min="0" step="1000" value="0">
+            </label>
+            <button class="button primary" type="submit">Run calculation</button>
+            <p class="engine-note" id="engine-note">
+              Source: Quick Calc, Tax Parameters, and States workbook tabs. This is a review
+              build, not tax advice.
+            </p>
+          </form>
+
+          <div class="engine-output-panel" aria-live="polite">
+            <p class="mini-label">Calculated outputs</p>
+            <div class="engine-results">
+              <div>
+                <span>Total taxable income</span>
+                <strong id="qc-total-taxable">$0</strong>
+              </div>
+              <div>
+                <span>Federal ordinary tax</span>
+                <strong id="qc-federal-ordinary">$0</strong>
+              </div>
+              <div>
+                <span>LTCG tax</span>
+                <strong id="qc-ltcg-tax">$0</strong>
+              </div>
+              <div>
+                <span>State tax</span>
+                <strong id="qc-state-tax">$0</strong>
+              </div>
+              <div class="emphasis">
+                <span>Combined tax</span>
+                <strong id="qc-combined-tax">$0</strong>
+              </div>
+              <div>
+                <span>Federal effective rate</span>
+                <strong id="qc-fed-effective">0.0%</strong>
+              </div>
+              <div>
+                <span>Combined effective rate</span>
+                <strong id="qc-combined-effective">0.0%</strong>
+              </div>
+              <div>
+                <span>Federal marginal rate</span>
+                <strong id="qc-marginal">0.0%</strong>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -175,6 +251,7 @@
     </footer>
 
     <script src="owner-nav.js?v=owner-nav"></script>
-    <script src="map.js?v=protected-map"></script>
+    <script src="tax-engine.js?v=quick-alpha"></script>
+    <script src="map.js?v=quick-alpha"></script>
   </body>
 </html>

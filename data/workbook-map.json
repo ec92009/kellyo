@@ -63,7 +63,7 @@
       "module": "Free public calculator",
       "category": "Calculator",
       "priority": "V1",
-      "status": "Needs engine",
+      "status": "Formula port started",
       "inputs": [
         "Filing status",
         "State",
@@ -75,7 +75,7 @@
         "State tax",
         "Combined effective rate"
       ],
-      "testFocus": "Check bracket math, state approximations, and whether this is safe as a lead magnet."
+      "testFocus": "Compare the browser alpha against workbook Quick Calc cases, then decide whether it is safe as a lead magnet."
     },
     {
       "name": "Prior Year 2025",

@@ -1,0 +1,715 @@
+{
+  "taxYear": 2026,
+  "sourceWorkbook": "QuarterlyTaxCalc_2026_v50.xlsx",
+  "generatedFrom": {
+    "ordinaryBrackets": "Tax Parameters!B5:F11",
+    "standardDeductions": "Tax Parameters!A14:B17",
+    "longTermCapitalGainBands": "Tax Parameters!A21:C24",
+    "stateTable": "States!A8:E58",
+    "specialStateQuickCalcBrackets": "Quick Calc!B17"
+  },
+  "filingStatuses": [
+    "Single",
+    "MFJ",
+    "HoH",
+    "MFS"
+  ],
+  "federal": {
+    "ordinaryBrackets": {
+      "Single": [
+        {
+          "start": 0,
+          "rate": 0.1,
+          "source": "Tax Parameters!B5,C5"
+        },
+        {
+          "start": 12400,
+          "rate": 0.12,
+          "source": "Tax Parameters!B6,C6"
+        },
+        {
+          "start": 50400,
+          "rate": 0.22,
+          "source": "Tax Parameters!B7,C7"
+        },
+        {
+          "start": 105700,
+          "rate": 0.24,
+          "source": "Tax Parameters!B8,C8"
+        },
+        {
+          "start": 201775,
+          "rate": 0.32,
+          "source": "Tax Parameters!B9,C9"
+        },
+        {
+          "start": 256225,
+          "rate": 0.35,
+          "source": "Tax Parameters!B10,C10"
+        },
+        {
+          "start": 640600,
+          "rate": 0.37,
+          "source": "Tax Parameters!B11,C11"
+        }
+      ],
+      "MFJ": [
+        {
+          "start": 0,
+          "rate": 0.1,
+          "source": "Tax Parameters!B5,D5"
+        },
+        {
+          "start": 24800,
+          "rate": 0.12,
+          "source": "Tax Parameters!B6,D6"
+        },
+        {
+          "start": 100800,
+          "rate": 0.22,
+          "source": "Tax Parameters!B7,D7"
+        },
+        {
+          "start": 211400,
+          "rate": 0.24,
+          "source": "Tax Parameters!B8,D8"
+        },
+        {
+          "start": 403550,
+          "rate": 0.32,
+          "source": "Tax Parameters!B9,D9"
+        },
+        {
+          "start": 512450,
+          "rate": 0.35,
+          "source": "Tax Parameters!B10,D10"
+        },
+        {
+          "start": 768700,
+          "rate": 0.37,
+          "source": "Tax Parameters!B11,D11"
+        }
+      ],
+      "HoH": [
+        {
+          "start": 0,
+          "rate": 0.1,
+          "source": "Tax Parameters!B5,E5"
+        },
+        {
+          "start": 17700,
+          "rate": 0.12,
+          "source": "Tax Parameters!B6,E6"
+        },
+        {
+          "start": 67450,
+          "rate": 0.22,
+          "source": "Tax Parameters!B7,E7"
+        },
+        {
+          "start": 105700,
+          "rate": 0.24,
+          "source": "Tax Parameters!B8,E8"
+        },
+        {
+          "start": 201775,
+          "rate": 0.32,
+          "source": "Tax Parameters!B9,E9"
+        },
+        {
+          "start": 256200,
+          "rate": 0.35,
+          "source": "Tax Parameters!B10,E10"
+        },
+        {
+          "start": 640600,
+          "rate": 0.37,
+          "source": "Tax Parameters!B11,E11"
+        }
+      ],
+      "MFS": [
+        {
+          "start": 0,
+          "rate": 0.1,
+          "source": "Tax Parameters!B5,F5"
+        },
+        {
+          "start": 12400,
+          "rate": 0.12,
+          "source": "Tax Parameters!B6,F6"
+        },
+        {
+          "start": 50400,
+          "rate": 0.22,
+          "source": "Tax Parameters!B7,F7"
+        },
+        {
+          "start": 105700,
+          "rate": 0.24,
+          "source": "Tax Parameters!B8,F8"
+        },
+        {
+          "start": 201775,
+          "rate": 0.32,
+          "source": "Tax Parameters!B9,F9"
+        },
+        {
+          "start": 256225,
+          "rate": 0.35,
+          "source": "Tax Parameters!B10,F10"
+        },
+        {
+          "start": 384350,
+          "rate": 0.37,
+          "source": "Tax Parameters!B11,F11"
+        }
+      ]
+    },
+    "standardDeductions": {
+      "Single": {
+        "amount": 16100,
+        "source": "Tax Parameters!B14"
+      },
+      "MFJ": {
+        "amount": 32200,
+        "source": "Tax Parameters!B15"
+      },
+      "HoH": {
+        "amount": 24150,
+        "source": "Tax Parameters!B16"
+      },
+      "MFS": {
+        "amount": 16100,
+        "source": "Tax Parameters!B17"
+      }
+    },
+    "longTermCapitalGainBands": {
+      "Single": {
+        "zeroTop": 49450,
+        "fifteenTop": 545500,
+        "source": "Tax Parameters!B21:C21"
+      },
+      "MFJ": {
+        "zeroTop": 98900,
+        "fifteenTop": 613700,
+        "source": "Tax Parameters!B22:C22"
+      },
+      "HoH": {
+        "zeroTop": 66200,
+        "fifteenTop": 579600,
+        "source": "Tax Parameters!B23:C23"
+      },
+      "MFS": {
+        "zeroTop": 49450,
+        "fifteenTop": 306850,
+        "source": "Tax Parameters!B24:C24"
+      }
+    }
+  },
+  "states": {
+    "Alabama": {
+      "structure": "graduated",
+      "topRate": 0.05,
+      "standardDeduction": 8500,
+      "notes": "",
+      "source": "States!A8:E8"
+    },
+    "Alaska": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A9:E9"
+    },
+    "Arizona": {
+      "structure": "flat",
+      "topRate": 0.025,
+      "standardDeduction": 16700,
+      "notes": "",
+      "source": "States!A10:E10"
+    },
+    "Arkansas": {
+      "structure": "graduated",
+      "topRate": 0.039,
+      "standardDeduction": 4940,
+      "notes": "",
+      "source": "States!A11:E11"
+    },
+    "California": {
+      "structure": "graduated",
+      "topRate": 0.133,
+      "standardDeduction": 11080,
+      "notes": "",
+      "source": "States!A12:E12",
+      "quickCalcBrackets": [
+        {
+          "start": 0,
+          "end": 22158,
+          "rate": 0.01
+        },
+        {
+          "start": 22158,
+          "end": 52528,
+          "rate": 0.02
+        },
+        {
+          "start": 52528,
+          "end": 82904,
+          "rate": 0.04
+        },
+        {
+          "start": 82904,
+          "end": 115084,
+          "rate": 0.06
+        },
+        {
+          "start": 115084,
+          "end": 145448,
+          "rate": 0.08
+        },
+        {
+          "start": 145448,
+          "end": 742958,
+          "rate": 0.093
+        },
+        {
+          "start": 742958,
+          "end": 891542,
+          "rate": 0.103
+        },
+        {
+          "start": 891542,
+          "end": 1000000,
+          "rate": 0.113
+        },
+        {
+          "start": 1000000,
+          "end": 1485906,
+          "rate": 0.123
+        },
+        {
+          "start": 1485906,
+          "end": null,
+          "rate": 0.133
+        }
+      ],
+      "quickCalcStandardDeduction": 11080,
+      "quickCalcSource": "Quick Calc!B17"
+    },
+    "Colorado": {
+      "structure": "flat",
+      "topRate": 0.044,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A13:E13"
+    },
+    "Connecticut": {
+      "structure": "graduated",
+      "topRate": 0.0699,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A14:E14"
+    },
+    "Delaware": {
+      "structure": "graduated",
+      "topRate": 0.066,
+      "standardDeduction": 6500,
+      "notes": "",
+      "source": "States!A15:E15"
+    },
+    "District of Columbia": {
+      "structure": "graduated",
+      "topRate": 0.095,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A16:E16"
+    },
+    "Florida": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A17:E17"
+    },
+    "Georgia": {
+      "structure": "flat",
+      "topRate": 0.0519,
+      "standardDeduction": 24000,
+      "notes": "",
+      "source": "States!A18:E18"
+    },
+    "Hawaii": {
+      "structure": "graduated",
+      "topRate": 0.0825,
+      "standardDeduction": 8800,
+      "notes": "",
+      "source": "States!A19:E19"
+    },
+    "Idaho": {
+      "structure": "flat",
+      "topRate": 0.053,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A20:E20"
+    },
+    "Illinois": {
+      "structure": "flat",
+      "topRate": 0.0495,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A21:E21"
+    },
+    "Indiana": {
+      "structure": "flat",
+      "topRate": 0.0295,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A22:E22"
+    },
+    "Iowa": {
+      "structure": "flat",
+      "topRate": 0.038,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A23:E23"
+    },
+    "Kansas": {
+      "structure": "graduated",
+      "topRate": 0.0558,
+      "standardDeduction": 8240,
+      "notes": "",
+      "source": "States!A24:E24"
+    },
+    "Kentucky": {
+      "structure": "flat",
+      "topRate": 0.035,
+      "standardDeduction": 3360,
+      "notes": "",
+      "source": "States!A25:E25"
+    },
+    "Louisiana": {
+      "structure": "flat",
+      "topRate": 0.03,
+      "standardDeduction": 25750,
+      "notes": "",
+      "source": "States!A26:E26"
+    },
+    "Maine": {
+      "structure": "graduated",
+      "topRate": 0.0715,
+      "standardDeduction": 16700,
+      "notes": "",
+      "source": "States!A27:E27"
+    },
+    "Maryland": {
+      "structure": "graduated",
+      "topRate": 0.0575,
+      "standardDeduction": 6700,
+      "notes": "",
+      "source": "States!A28:E28"
+    },
+    "Massachusetts": {
+      "structure": "graduated",
+      "topRate": 0.05,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A29:E29"
+    },
+    "Michigan": {
+      "structure": "flat",
+      "topRate": 0.0425,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A30:E30"
+    },
+    "Minnesota": {
+      "structure": "graduated",
+      "topRate": 0.0985,
+      "standardDeduction": 30600,
+      "notes": "",
+      "source": "States!A31:E31"
+    },
+    "Mississippi": {
+      "structure": "flat",
+      "topRate": 0.04,
+      "standardDeduction": 4600,
+      "notes": "",
+      "source": "States!A32:E32"
+    },
+    "Missouri": {
+      "structure": "graduated",
+      "topRate": 0.047,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A33:E33"
+    },
+    "Montana": {
+      "structure": "graduated",
+      "topRate": 0.0565,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A34:E34"
+    },
+    "Nebraska": {
+      "structure": "graduated",
+      "topRate": 0.0455,
+      "standardDeduction": 17700,
+      "notes": "",
+      "source": "States!A35:E35"
+    },
+    "Nevada": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A36:E36"
+    },
+    "New Hampshire": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A37:E37"
+    },
+    "New Jersey": {
+      "structure": "graduated",
+      "topRate": 0.1075,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A38:E38",
+      "quickCalcBrackets": [
+        {
+          "start": 0,
+          "end": 20000,
+          "rate": 0.014
+        },
+        {
+          "start": 20000,
+          "end": 50000,
+          "rate": 0.0175
+        },
+        {
+          "start": 50000,
+          "end": 70000,
+          "rate": 0.0245
+        },
+        {
+          "start": 70000,
+          "end": 80000,
+          "rate": 0.035
+        },
+        {
+          "start": 80000,
+          "end": 150000,
+          "rate": 0.0553
+        },
+        {
+          "start": 150000,
+          "end": 500000,
+          "rate": 0.0637
+        },
+        {
+          "start": 500000,
+          "end": 1000000,
+          "rate": 0.0897
+        },
+        {
+          "start": 1000000,
+          "end": null,
+          "rate": 0.1075
+        }
+      ],
+      "quickCalcStandardDeduction": 0,
+      "quickCalcSource": "Quick Calc!B17"
+    },
+    "New Mexico": {
+      "structure": "graduated",
+      "topRate": 0.059,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A39:E39"
+    },
+    "New York": {
+      "structure": "graduated",
+      "topRate": 0.109,
+      "standardDeduction": 16050,
+      "notes": "",
+      "source": "States!A40:E40",
+      "quickCalcBrackets": [
+        {
+          "start": 0,
+          "end": 17150,
+          "rate": 0.04
+        },
+        {
+          "start": 17150,
+          "end": 23600,
+          "rate": 0.045
+        },
+        {
+          "start": 23600,
+          "end": 27900,
+          "rate": 0.0525
+        },
+        {
+          "start": 27900,
+          "end": 161550,
+          "rate": 0.055
+        },
+        {
+          "start": 161550,
+          "end": 323200,
+          "rate": 0.06
+        },
+        {
+          "start": 323200,
+          "end": 2155350,
+          "rate": 0.0685
+        },
+        {
+          "start": 2155350,
+          "end": 5000000,
+          "rate": 0.0965
+        },
+        {
+          "start": 5000000,
+          "end": 25000000,
+          "rate": 0.103
+        },
+        {
+          "start": 25000000,
+          "end": null,
+          "rate": 0.109
+        }
+      ],
+      "quickCalcStandardDeduction": 16050,
+      "quickCalcSource": "Quick Calc!B17"
+    },
+    "North Carolina": {
+      "structure": "flat",
+      "topRate": 0.0425,
+      "standardDeduction": 25500,
+      "notes": "",
+      "source": "States!A41:E41"
+    },
+    "North Dakota": {
+      "structure": "graduated",
+      "topRate": 0.025,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A42:E42"
+    },
+    "Ohio": {
+      "structure": "flat",
+      "topRate": 0.0275,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A43:E43"
+    },
+    "Oklahoma": {
+      "structure": "graduated",
+      "topRate": 0.0475,
+      "standardDeduction": 25700,
+      "notes": "",
+      "source": "States!A44:E44"
+    },
+    "Oregon": {
+      "structure": "graduated",
+      "topRate": 0.099,
+      "standardDeduction": 5495,
+      "notes": "",
+      "source": "States!A45:E45"
+    },
+    "Pennsylvania": {
+      "structure": "flat",
+      "topRate": 0.0307,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A46:E46"
+    },
+    "Rhode Island": {
+      "structure": "graduated",
+      "topRate": 0.0599,
+      "standardDeduction": 21150,
+      "notes": "",
+      "source": "States!A47:E47"
+    },
+    "South Carolina": {
+      "structure": "graduated",
+      "topRate": 0.0521,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A48:E48"
+    },
+    "South Dakota": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A49:E49"
+    },
+    "Tennessee": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A50:E50"
+    },
+    "Texas": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A51:E51"
+    },
+    "Utah": {
+      "structure": "flat",
+      "topRate": 0.0445,
+      "standardDeduction": 32200,
+      "notes": "",
+      "source": "States!A52:E52"
+    },
+    "Vermont": {
+      "structure": "graduated",
+      "topRate": 0.0875,
+      "standardDeduction": 16800,
+      "notes": "",
+      "source": "States!A53:E53"
+    },
+    "Virginia": {
+      "structure": "graduated",
+      "topRate": 0.0575,
+      "standardDeduction": 16000,
+      "notes": "",
+      "source": "States!A54:E54"
+    },
+    "Washington": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A55:E55"
+    },
+    "West Virginia": {
+      "structure": "graduated",
+      "topRate": 0.0482,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A56:E56"
+    },
+    "Wisconsin": {
+      "structure": "graduated",
+      "topRate": 0.0765,
+      "standardDeduction": 30790,
+      "notes": "",
+      "source": "States!A57:E57"
+    },
+    "Wyoming": {
+      "structure": "none",
+      "topRate": 0,
+      "standardDeduction": 0,
+      "notes": "",
+      "source": "States!A58:E58"
+    }
+  }
+}

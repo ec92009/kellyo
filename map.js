@@ -1,4 +1,13 @@
 const formatter = new Intl.NumberFormat("en-US");
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+const percentFormatter = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 1,
+});
 const statusClass = {
   "Mapped": "mapped",
   "Mapped in site": "mapped",
@@ -8,11 +17,13 @@ const statusClass = {
   "Needs versioning": "needs",
   "Needs state policy": "needs",
   "Needs review workflow": "needs",
+  "Formula port started": "ready",
   "Ready for expansion": "ready",
   "Backlog": "backlog",
 };
 
 let workbookData = null;
+let taxParameters = null;
 let activeFilter = "All";
 
 function byId(id) {
@@ -115,10 +126,72 @@ function bindControls() {
   });
 }
 
+function populateQuickCalcControls() {
+  const statusSelect = byId("qc-status");
+  const stateSelect = byId("qc-state");
+  statusSelect.innerHTML = "";
+  taxParameters.filingStatuses.forEach((status) => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = status;
+    if (status === "MFJ") option.selected = true;
+    statusSelect.append(option);
+  });
+
+  stateSelect.innerHTML = "";
+  ["None", ...Object.keys(taxParameters.states).filter((state) => state !== "None").sort()].forEach((state) => {
+    const option = document.createElement("option");
+    option.value = state;
+    option.textContent = state;
+    if (state === "California") option.selected = true;
+    stateSelect.append(option);
+  });
+}
+
+function quickCalcInput() {
+  return {
+    filingStatus: byId("qc-status").value,
+    state: byId("qc-state").value,
+    ordinaryIncome: byId("qc-ordinary").value,
+    longTermCapitalGains: byId("qc-ltcg").value,
+  };
+}
+
+function setQuickCalcResult(id, value, formatterFn = currencyFormatter.format) {
+  byId(id).textContent = formatterFn(value);
+}
+
+function renderQuickCalc() {
+  if (!taxParameters) return;
+  const result = window.KellyOTaxEngine.calculateQuickCalc(quickCalcInput(), taxParameters);
+  setQuickCalcResult("qc-total-taxable", result.totalTaxableIncome);
+  setQuickCalcResult("qc-federal-ordinary", result.federalOrdinaryTax);
+  setQuickCalcResult("qc-ltcg-tax", result.federalLongTermCapitalGainsTax);
+  setQuickCalcResult("qc-state-tax", result.stateTax);
+  setQuickCalcResult("qc-combined-tax", result.combinedTax);
+  setQuickCalcResult("qc-fed-effective", result.federalEffectiveRate, percentFormatter.format);
+  setQuickCalcResult("qc-combined-effective", result.combinedEffectiveRate, percentFormatter.format);
+  setQuickCalcResult("qc-marginal", result.federalMarginalRate, percentFormatter.format);
+}
+
+async function bindQuickCalc() {
+  taxParameters = await window.KellyOTaxEngine.loadTaxParameters();
+  populateQuickCalcControls();
+  byId("quick-calc-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    renderQuickCalc();
+  });
+  ["qc-status", "qc-state", "qc-ordinary", "qc-ltcg"].forEach((id) => {
+    byId(id).addEventListener("input", renderQuickCalc);
+    byId(id).addEventListener("change", renderQuickCalc);
+  });
+  renderQuickCalc();
+}
+
 function hydrateAccessState() {
   const access = window.KellyOGateAccess.getAccess();
   if (!access) return;
-  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Live calculations are still withheld until the workbook formulas are ported and CPA-tested.`;
+  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Quick Calc is available for review; full scenario calculations remain withheld until the workbook formulas are ported and CPA-tested.`;
 }
 
 async function loadWorkbookMap() {
@@ -129,6 +202,7 @@ async function loadWorkbookMap() {
   renderModules();
   renderScenarios();
   bindControls();
+  await bindQuickCalc();
 }
 
 loadWorkbookMap();
