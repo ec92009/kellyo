@@ -85,6 +85,7 @@
     const workspaceCopy = document.getElementById(options.workspaceCopyId || "workspace-copy");
     const successTarget = document.querySelector(options.successSelector || "[data-gate-success]");
     const successLink = document.getElementById(options.successLinkId || "enter-paywall");
+    const trialTarget = document.querySelector(options.trialSelector || "[data-trial-cta]");
     if (!form || !message || !workspace || !workspaceCopy) return;
 
     const clientCredentials = await loadCredentials();
@@ -103,6 +104,7 @@
         message.textContent = "Mock paywall closed. Client username and password required.";
         workspace.classList.add("is-locked");
         if (successTarget) successTarget.hidden = true;
+        if (trialTarget) trialTarget.hidden = false;
         return;
       }
       setAccess(matched);
@@ -110,6 +112,7 @@
       workspaceCopy.textContent = `${matched.label} can now see the test-lab placeholder. Live calculations are still withheld until the workbook formulas are ported and CPA-tested.`;
       workspace.classList.remove("is-locked");
       if (successTarget) successTarget.hidden = false;
+      if (trialTarget) trialTarget.hidden = true;
       workspace.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
