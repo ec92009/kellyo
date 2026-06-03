@@ -8,9 +8,14 @@
       name="description"
       content="Map the source quarterly tax workbook into KellyO web app modules, test priorities, and CPA review questions."
     >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body class="is-access-pending">
+    <script src="gate-access.js?v=client-gate"></script>
+    <script>
+      window.KellyOGateAccess.requireAccess({ redirectUrl: "./gate.html?next=map" });
+    </script>
     <header class="site-header">
       <a class="brand" href="./" aria-label="KellyO home">
         <span class="brand-mark" aria-hidden="true">K</span>
@@ -18,12 +23,9 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="./">Preview</a>
-        <a href="./map.html" aria-current="page">Workbook Map</a>
-        <a href="./clients.html">Clients</a>
-        <a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comments</a>
       </nav>
+      <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
-      <a class="nav-cta" href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comment</a>
     </header>
 
     <main class="map-page">
@@ -46,36 +48,12 @@
           </p>
           <div class="gate-actions">
             <a class="button primary" href="#qa-path">Review test path</a>
-            <a class="button secondary dark" href="#gate">Open mock gate</a>
+            <a class="button secondary dark" href="./gate.html">Client gate</a>
           </div>
         </div>
       </section>
 
-      <section class="calc-gate" id="gate" aria-labelledby="gate-title">
-        <div class="gate-copy">
-          <p class="section-kicker">Access boundary</p>
-          <h2 id="gate-title">Calculation workspace is gated.</h2>
-          <p>
-            Public visitors can inspect the product concept and workbook map. Anything that
-            looks like tax math belongs behind reviewer access until the formula engine is
-            ported, tested, and approved.
-          </p>
-        </div>
-        <form class="gate-form" id="gate-form">
-          <label>
-            <span>Username</span>
-            <input name="username" type="text" placeholder="Client username" autocomplete="username">
-          </label>
-          <label>
-            <span>Password</span>
-            <input name="password" type="password" placeholder="Paywall password" autocomplete="current-password">
-          </label>
-          <button class="button primary" type="submit">Pass mock paywall</button>
-          <p id="gate-message" class="gate-message" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section class="gated-workspace is-locked" id="gated-workspace" aria-labelledby="workspace-title">
+      <section class="gated-workspace" id="gated-workspace" aria-labelledby="workspace-title">
         <div>
           <p class="mini-label">Reviewer-only mock</p>
           <h2 id="workspace-title">Test lab placeholder</h2>
@@ -193,10 +171,10 @@
     <footer class="site-footer">
       <span>KellyO</span>
       <span>Workbook map only. Calculations not live yet.</span>
-      <span><a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Leave review notes</a></span>
+      <span>Protected by the mock client gate.</span>
     </footer>
 
-    <script src="owner-nav.js"></script>
-    <script src="map.js"></script>
+    <script src="owner-nav.js?v=owner-nav"></script>
+    <script src="map.js?v=protected-map"></script>
   </body>
 </html>

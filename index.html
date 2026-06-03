@@ -14,6 +14,7 @@
       content="Scenario tax planning for CPAs, EAs, and advisory firms serving business owners."
     >
     <meta property="og:image" content="assets/hero-dashboard.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/hero-dashboard.png" as="image">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -24,15 +25,10 @@
         <span>KellyO</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#engine">Engine</a>
-        <a href="./map.html">Workbook Map</a>
-        <a href="./clients.html">Clients</a>
-        <a href="#strategies">Strategies</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#preview">Preview</a>
+        <a href="./" aria-current="page">Preview</a>
       </nav>
+      <a class="client-cta" href="./gate.html">Clients</a>
       <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
-      <a class="nav-cta" href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comment</a>
     </header>
 
     <main id="top">
@@ -49,7 +45,7 @@
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="#engine">See the product shape</a>
-            <a class="button secondary" href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Start a Kelly review</a>
+            <a class="button secondary" href="./gate.html">Client login</a>
           </div>
           <dl class="hero-metrics" aria-label="Workbook conversion snapshot">
             <div>
@@ -261,7 +257,7 @@
       <span>Built from the 2026 quarterly tax workbook.</span>
     </footer>
 
-    <script src="owner-nav.js"></script>
+    <script src="owner-nav.js?v=owner-nav"></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -30,6 +30,12 @@ body {
   background: var(--paper);
 }
 
+body.is-access-pending .site-header,
+body.is-access-pending .map-page,
+body.is-access-pending .site-footer {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -84,17 +90,25 @@ textarea {
 }
 
 .nav-links a:hover,
-.nav-cta:hover {
+.nav-cta:hover,
+.client-cta:hover {
   color: var(--teal-dark);
 }
 
-.nav-cta {
+.nav-cta,
+.client-cta {
   justify-self: end;
   padding: 11px 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
   font-weight: 700;
+}
+
+.client-cta[aria-current="page"] {
+  color: #fff;
+  border-color: var(--teal-dark);
+  background: var(--teal-dark);
 }
 
 .owner-cta {
@@ -568,12 +582,14 @@ textarea {
 }
 
 .map-page,
-.owner-page {
+.owner-page,
+.client-page {
   background: var(--paper);
 }
 
 .map-hero,
-.owner-hero {
+.owner-hero,
+.client-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.45fr);
   gap: 32px;
@@ -584,13 +600,15 @@ textarea {
 }
 
 .map-hero-copy,
-.owner-hero > div:first-child {
+.owner-hero > div:first-child,
+.client-hero-copy {
   display: grid;
   align-content: center;
 }
 
 .map-hero h1,
-.owner-hero h1 {
+.owner-hero h1,
+.client-hero h1 {
   margin: 12px 0 18px;
   font-size: clamp(3rem, 8vw, 6.5rem);
   line-height: 0.9;
@@ -599,6 +617,7 @@ textarea {
 
 .map-hero p,
 .owner-hero p,
+.client-hero p,
 .gate-copy p,
 .owner-lock p,
 .owner-note p,
@@ -609,6 +628,7 @@ textarea {
 }
 
 .map-status-panel,
+.client-status-panel,
 .owner-mode,
 .owner-lock,
 .calc-gate,
@@ -620,12 +640,14 @@ textarea {
 }
 
 .map-status-panel,
+.client-status-panel,
 .owner-mode {
   padding: 28px;
   box-shadow: var(--shadow);
 }
 
 .map-status-panel h2,
+.client-status-panel h2,
 .owner-mode h2,
 .calc-gate h2,
 .gated-workspace h2,
@@ -650,6 +672,16 @@ textarea {
   max-width: 1160px;
   margin: 0 auto 28px;
   padding: 28px;
+}
+
+.client-gate,
+.client-workspace {
+  margin-bottom: 34px;
+}
+
+.gate-success-actions {
+  display: grid;
+  gap: 10px;
 }
 
 .gate-form,
@@ -978,11 +1010,73 @@ textarea {
   margin-bottom: 22px;
 }
 
+.owner-toolbar-actions,
 .owner-exit-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.owner-exit-actions {
   margin-top: 26px;
+}
+
+.client-editor {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7faf8;
+}
+
+.client-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.client-editor label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.client-editor .wide {
+  grid-column: 1 / -1;
+}
+
+.client-editor input,
+.client-editor select,
+.client-editor textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 11px;
+  color: var(--ink);
+  background: #fff;
+}
+
+.client-editor textarea {
+  resize: vertical;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.editor-actions p {
+  flex: 1;
+  margin: 0;
+  color: var(--soft-ink);
+  font-weight: 700;
 }
 
 .client-table-wrap {
@@ -1088,7 +1182,7 @@ textarea {
 
 @media (max-width: 1020px) {
   .site-header {
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto auto;
     padding: 0 18px;
     gap: 10px;
   }
@@ -1098,6 +1192,7 @@ textarea {
   }
 
   .nav-cta,
+  .client-cta,
   .owner-cta {
     justify-self: end;
   }
@@ -1120,6 +1215,7 @@ textarea {
   .preview,
   .map-hero,
   .owner-hero,
+  .client-hero,
   .calc-gate,
   .gated-workspace,
   .map-summary,
@@ -1137,7 +1233,8 @@ textarea {
   }
 
   .map-hero,
-  .owner-hero {
+  .owner-hero,
+  .client-hero {
     padding: 54px 20px 28px;
   }
 
@@ -1159,6 +1256,10 @@ textarea {
     align-items: stretch;
     flex-direction: column;
   }
+
+  .client-editor-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 620px) {
@@ -1167,9 +1268,14 @@ textarea {
   }
 
   .nav-cta,
+  .client-cta,
   .owner-cta {
     padding: 9px 11px;
     font-size: 0.9rem;
+  }
+
+  .brand span:last-child {
+    display: none;
   }
 
   .hero h1 {

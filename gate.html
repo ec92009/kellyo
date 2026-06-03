@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KellyO | Client Access</title>
+    <meta
+      name="description"
+      content="Clean KellyO mock client gate for reviewer access and paywall discussion."
+    >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=client-gate">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="KellyO home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>KellyO</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./">Preview</a>
+      </nav>
+      <a class="client-cta" href="./gate.html" aria-current="page">Clients</a>
+      <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+    </header>
+
+    <main class="client-page">
+      <section class="client-hero">
+        <div class="client-hero-copy">
+          <p class="eyebrow">Client access</p>
+          <h1>KellyO gate</h1>
+          <p>
+            A clean reviewer entry point for testing how clients would reach protected
+            calculation tools. The gate is still a mock paywall while the workbook formulas
+            are being ported and checked.
+          </p>
+        </div>
+        <div class="client-status-panel">
+          <p class="mini-label">Reviewer preview</p>
+          <h2>Credentials open the test lab only.</h2>
+          <p>
+            Passing this gate reveals the protected workspace placeholder. It does not make
+            any tax calculation live or reliable yet.
+          </p>
+        </div>
+      </section>
+
+      <section class="calc-gate client-gate" id="gate" aria-labelledby="gate-title">
+        <div class="gate-copy">
+          <p class="section-kicker">Mock paywall</p>
+          <h2 id="gate-title">Enter client credentials.</h2>
+          <p>
+            Kelly can use this page to test the first access flow without landing inside the
+            workbook map. Owner-managed localhost passwords are used when the mini server is running.
+          </p>
+        </div>
+        <form class="gate-form" id="gate-form">
+          <label>
+            <span>Username</span>
+            <input name="username" type="text" placeholder="Client username" autocomplete="username">
+          </label>
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Paywall password" autocomplete="current-password">
+          </label>
+          <button class="button primary" type="submit">Pass mock paywall</button>
+          <p id="gate-message" class="gate-message" aria-live="polite">Client username and password required.</p>
+          <div class="gate-success-actions" data-gate-success hidden>
+            <a class="button secondary dark" id="enter-paywall" href="./map.html">Enter protected workspace</a>
+          </div>
+        </form>
+      </section>
+
+      <section class="gated-workspace client-workspace is-locked" id="gated-workspace" aria-labelledby="workspace-title">
+        <div>
+          <p class="mini-label">Protected preview</p>
+          <h2 id="workspace-title">Client calculation workspace</h2>
+          <p id="workspace-copy">
+            This is where the client-facing scenario tools will appear after the formula
+            engine is ported, tested, and approved for CPA review.
+          </p>
+        </div>
+        <div class="locked-panels" aria-label="Client workspace status">
+          <article>
+            <span>Locked</span>
+            <h3>Scenario inputs</h3>
+            <p>Income, entity, state, and planning assumptions.</p>
+          </article>
+          <article>
+            <span>Locked</span>
+            <h3>Tax estimates</h3>
+            <p>Calculations wait for golden-test approval.</p>
+          </article>
+          <article>
+            <span>Review</span>
+            <h3>Advisor report</h3>
+            <p>Client-ready outputs stay behind the gate.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KellyO</span>
+      <span>Mock client access only. Calculations not live yet.</span>
+      <span>Protected workspace opens after login.</span>
+    </footer>
+
+    <script src="owner-nav.js?v=owner-nav"></script>
+    <script src="gate-access.js?v=client-gate"></script>
+    <script>
+      window.KellyOGateAccess.bindGate({ successLinkId: "enter-paywall" });
+    </script>
+  </body>
+</html>

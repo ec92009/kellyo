@@ -14,23 +14,6 @@ const statusClass = {
 
 let workbookData = null;
 let activeFilter = "All";
-const clientCredentials = [
-  {
-    id: 0,
-    username: "localhost",
-    password: "",
-    localOnly: true,
-    label: "Client 0: Owner localhost",
-  },
-  {
-    id: 1,
-    username: "Kelly",
-    password: "xxxxxx",
-    localOnly: false,
-    label: "Client 1: Kelly",
-  },
-];
-const localHosts = new Set(["localhost", "127.0.0.1", "::1", "0.0.0.0"]);
 
 function byId(id) {
   return document.getElementById(id);
@@ -132,43 +115,20 @@ function bindControls() {
   });
 }
 
-function bindGate() {
-  const form = byId("gate-form");
-  const message = byId("gate-message");
-  const workspace = byId("gated-workspace");
-  const workspaceCopy = byId("workspace-copy");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const username = String(formData.get("username") || "").trim();
-    const password = String(formData.get("password") || "");
-    const isLocal = localHosts.has(window.location.hostname) || window.location.protocol === "file:";
-    const matched = clientCredentials.find((client) => {
-      if (client.localOnly) {
-        return isLocal && username.toLowerCase() === client.username && password === client.password;
-      }
-      return username === client.username && password === client.password;
-    });
-    if (!matched) {
-      message.textContent = "Mock paywall closed. Client username and password required.";
-      workspace.classList.add("is-locked");
-      return;
-    }
-    message.textContent = `${matched.label} passed the mock paywall. Calculations remain locked pending formula tests.`;
-    workspaceCopy.textContent = `${matched.label} can now see the test-lab placeholder. Live calculations are still withheld until the workbook formulas are ported and CPA-tested.`;
-    workspace.classList.remove("is-locked");
-    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+function hydrateAccessState() {
+  const access = window.KellyOGateAccess.getAccess();
+  if (!access) return;
+  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Live calculations are still withheld until the workbook formulas are ported and CPA-tested.`;
 }
 
 async function loadWorkbookMap() {
   const response = await fetch("data/workbook-map.json");
   workbookData = await response.json();
+  hydrateAccessState();
   setSummary(workbookData.summary);
   renderModules();
   renderScenarios();
   bindControls();
-  bindGate();
 }
 
 loadWorkbookMap();

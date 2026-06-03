@@ -8,6 +8,7 @@
       name="description"
       content="Local-only KellyO owner console for reviewer and client access credentials."
     >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=owner-actions">
   </head>
   <body>
@@ -18,12 +19,9 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="./">Preview</a>
-        <a href="./map.html">Workbook Map</a>
-        <a href="./clients.html" aria-current="page">Clients</a>
-        <a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comments</a>
       </nav>
-      <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
-      <a class="nav-cta" href="./map.html#gate">Gate</a>
+      <a class="client-cta" href="./gate.html">Clients</a>
+      <a class="owner-cta" href="./clients.html?owner=1" data-owner-link aria-current="page" hidden>Owner</a>
     </header>
 
     <main class="owner-page">
@@ -38,8 +36,8 @@
           </p>
           <div class="owner-exit-actions" aria-label="Owner navigation">
             <a class="button primary" href="./">View public preview</a>
-            <a class="button secondary dark" href="./map.html">Workbook map</a>
-            <a class="button secondary dark" href="./map.html#gate">Test paywall</a>
+            <a class="button secondary dark" href="./gate.html">Test paywall</a>
+            <a class="button secondary dark" href="./map.html">Protected workspace</a>
           </div>
         </div>
         <div class="owner-mode" id="owner-mode">
@@ -63,10 +61,56 @@
         <div class="owner-toolbar">
           <div>
             <p class="section-kicker">Local credentials</p>
-            <h2>Paywall test access</h2>
+            <h2>Client management board</h2>
           </div>
-          <button class="button primary" id="toggle-passwords" type="button">Show passwords</button>
+          <div class="owner-toolbar-actions">
+            <button class="button secondary dark" id="add-client" type="button">Create client</button>
+            <button class="button primary" id="toggle-passwords" type="button">Show passwords</button>
+          </div>
         </div>
+        <form class="client-editor" id="client-editor" hidden>
+          <input name="originalUsername" type="hidden">
+          <div class="client-editor-grid">
+            <label>
+              <span>Name</span>
+              <input name="name" type="text" required>
+            </label>
+            <label>
+              <span>Role</span>
+              <input name="role" type="text" required>
+            </label>
+            <label>
+              <span>Tier</span>
+              <input name="tier" type="text" required>
+            </label>
+            <label>
+              <span>Username</span>
+              <input name="username" type="text" required autocomplete="off">
+            </label>
+            <label>
+              <span>Password</span>
+              <input name="password" type="text" autocomplete="off">
+            </label>
+            <label>
+              <span>Status</span>
+              <select name="status">
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Review</option>
+                <option>Disabled</option>
+              </select>
+            </label>
+            <label class="wide">
+              <span>Notes</span>
+              <textarea name="notes" rows="3"></textarea>
+            </label>
+          </div>
+          <div class="editor-actions">
+            <p id="client-editor-message" aria-live="polite"></p>
+            <button class="button secondary dark" id="cancel-client" type="button">Cancel</button>
+            <button class="button primary" type="submit">Save client</button>
+          </div>
+        </form>
         <div class="client-table-wrap">
           <table class="client-table">
             <thead>
@@ -101,7 +145,7 @@
       <span>Public visitors cannot load this table.</span>
     </footer>
 
-    <script src="owner-nav.js"></script>
+    <script src="owner-nav.js?v=owner-nav"></script>
     <script src="clients.js?v=owner-actions"></script>
   </body>
 </html>
