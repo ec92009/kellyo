@@ -16,6 +16,13 @@
       localOnly: false,
       label: "Client 1: Kelly",
     },
+    {
+      id: 2,
+      username: "Jerry",
+      password: "OliBru",
+      localOnly: false,
+      label: "Client 2: Jerry",
+    },
   ];
   const localHosts = new Set(["localhost", "127.0.0.1", "::1", "0.0.0.0"]);
   const isLocalHost = localHosts.has(window.location.hostname) || window.location.protocol === "file:";
