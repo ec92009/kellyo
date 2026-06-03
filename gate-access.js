@@ -122,6 +122,32 @@
     });
   }
 
+  function bindPasswordToggles(root = document) {
+    root.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      if (button.dataset.boundPasswordToggle) return;
+      const inputId = button.getAttribute("aria-controls");
+      const input = inputId
+        ? document.getElementById(inputId)
+        : button.closest(".password-field")?.querySelector("input");
+      if (!input) return;
+
+      function setVisible(isVisible) {
+        input.type = isVisible ? "text" : "password";
+        button.classList.toggle("is-visible", isVisible);
+        button.setAttribute("aria-pressed", String(isVisible));
+        button.setAttribute("aria-label", isVisible ? "Hide password" : "Show password");
+        button.setAttribute("title", isVisible ? "Hide password" : "Show password");
+      }
+
+      button.dataset.boundPasswordToggle = "true";
+      button.addEventListener("click", () => {
+        setVisible(input.type !== "text");
+        input.focus({ preventScroll: true });
+      });
+      setVisible(input.type === "text");
+    });
+  }
+
   async function bindGate(options = {}) {
     const form = document.getElementById(options.formId || "gate-form");
     const message = document.getElementById(options.messageId || "gate-message");
@@ -134,6 +160,7 @@
     const gateTitle = document.getElementById(options.titleId || "gate-title");
     const gateCopy = gateSection?.querySelector(".gate-copy p:not(.section-kicker)");
     if (!form || !message || !workspace || !workspaceCopy) return;
+    bindPasswordToggles(form);
 
     const defaultGateTitle = gateTitle?.textContent || "";
     const defaultGateCopy = gateCopy?.textContent || "";
@@ -251,6 +278,7 @@
   window.KellyOGateAccess = {
     bindAccountMenu,
     bindGate,
+    bindPasswordToggles,
     clearAccess,
     getAccess,
     isLocalHost,

@@ -1205,6 +1205,55 @@ textarea {
   background: var(--panel);
 }
 
+.password-field {
+  position: relative;
+  display: block;
+}
+
+.gate-form .password-field input {
+  padding-right: 54px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 8px;
+  color: var(--soft-ink);
+  background: transparent;
+  cursor: pointer;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  color: var(--teal-dark);
+  background: var(--mist);
+}
+
+.password-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.password-toggle .eye-slash {
+  opacity: 0;
+}
+
+.password-toggle.is-visible .eye-slash {
+  opacity: 1;
+}
+
 .gate-message {
   min-height: 24px;
   margin: 0;

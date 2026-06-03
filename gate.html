@@ -9,8 +9,8 @@
       content="KellyO client access for protected tax-planning scenario tools."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <script src="theme.js?v=95.1"></script>
-    <link rel="stylesheet" href="styles.css?v=95.1">
+    <script src="theme.js?v=95.2"></script>
+    <link rel="stylesheet" href="styles.css?v=95.2">
   </head>
   <body>
     <header class="site-header">
@@ -39,7 +39,7 @@
             <button class="account-logout" type="button" data-account-logout>Log out</button>
           </div>
         </div>
-        <span class="version-chip" data-site-version>v95.1</span>
+        <span class="version-chip" data-site-version>v95.2</span>
         <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
           <span>Day</span>
           <span>Night</span>
@@ -83,7 +83,24 @@
           </label>
           <label>
             <span>Password</span>
-            <input name="password" type="password" placeholder="Password" autocomplete="current-password">
+            <span class="password-field">
+              <input id="gate-password" name="password" type="password" placeholder="Password" autocomplete="current-password">
+              <button
+                class="password-toggle"
+                type="button"
+                data-password-toggle
+                aria-label="Show password"
+                aria-controls="gate-password"
+                aria-pressed="false"
+                title="Show password"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path>
+                  <circle cx="12" cy="12" r="2.6"></circle>
+                  <path class="eye-slash" d="M4.5 19.5 19.5 4.5"></path>
+                </svg>
+              </button>
+            </span>
           </label>
           <button class="button primary" type="submit">Sign in</button>
           <p id="gate-message" class="gate-message" aria-live="polite">Client username and password required.</p>
@@ -271,10 +288,10 @@
       <span>Protected workspace opens after login.</span>
     </footer>
 
-    <script src="owner-nav.js?v=95.1"></script>
-    <script src="version.js?v=95.1"></script>
-    <script src="status-panel.js?v=95.1"></script>
-    <script src="gate-access.js?v=95.1"></script>
+    <script src="owner-nav.js?v=95.2"></script>
+    <script src="version.js?v=95.2"></script>
+    <script src="status-panel.js?v=95.2"></script>
+    <script src="gate-access.js?v=95.2"></script>
     <script>
       window.KellyOGateAccess.bindGate({ successLinkId: "enter-paywall" });
       window.KellyOGateAccess.bindAccountMenu();
