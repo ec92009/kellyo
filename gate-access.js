@@ -221,11 +221,34 @@
     });
   }
 
+  function bindSignedInClientCtas(access, logoutUrl) {
+    document.body.classList.toggle("has-client-access", Boolean(access));
+    if (!access) return;
+
+    document.querySelectorAll(".client-cta").forEach((link) => {
+      link.textContent = "Log out";
+      link.setAttribute("href", logoutUrl);
+      link.setAttribute("aria-label", "Log out and return to the client gate");
+      link.removeAttribute("aria-current");
+      if (link.dataset.boundAccessLogout) return;
+
+      link.dataset.boundAccessLogout = "true";
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        clearAccess();
+        window.location.assign(logoutUrl);
+      });
+    });
+  }
+
   function bindAccountMenu(options = {}) {
+    const access = getAccess();
+    const logoutUrl = options.logoutUrl || "./gate.html";
+    bindSignedInClientCtas(access, logoutUrl);
+
     const menu = document.querySelector(options.menuSelector || "[data-account-menu]");
     if (!menu) return;
 
-    const access = getAccess();
     if (!access) {
       menu.hidden = true;
       return;
@@ -253,7 +276,7 @@
 
     logoutButton.addEventListener("click", () => {
       clearAccess();
-      window.location.assign(options.logoutUrl || "./gate.html");
+      window.location.assign(logoutUrl);
     });
 
     document.addEventListener("click", (event) => {

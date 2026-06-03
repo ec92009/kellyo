@@ -134,6 +134,7 @@ textarea {
   border-radius: 8px;
   background: var(--panel);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .client-cta[aria-current="page"] {
@@ -150,6 +151,7 @@ textarea {
   color: #fff;
   background: var(--teal);
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .account-menu {
@@ -1957,6 +1959,10 @@ textarea {
 
   .header-tools {
     gap: 5px;
+  }
+
+  .has-client-access .account-menu {
+    display: none;
   }
 
   .account-button {
