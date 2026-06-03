@@ -583,8 +583,72 @@ textarea {
 
 .map-page,
 .owner-page,
-.client-page {
+.client-page,
+.trial-page {
   background: var(--paper);
+}
+
+.trial-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.55fr);
+  gap: 44px;
+  align-items: center;
+  min-height: calc(100svh - 128px);
+  max-width: 1160px;
+  padding: 64px 32px;
+  margin: 0 auto;
+}
+
+.trial-copy h1 {
+  margin: 12px 0 18px;
+  font-size: clamp(3.2rem, 8vw, 6.8rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.trial-copy p {
+  max-width: 680px;
+  color: var(--soft-ink);
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.trial-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.trial-proof article {
+  min-height: 132px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.trial-proof span {
+  color: var(--clay);
+  font-weight: 900;
+}
+
+.trial-proof strong {
+  display: block;
+  margin-top: 18px;
+  line-height: 1.25;
+}
+
+.trial-form {
+  max-width: none;
+  box-shadow: var(--shadow);
+}
+
+.trial-message {
+  min-height: 24px;
+  margin: 0;
+  color: var(--soft-ink);
+  font-weight: 700;
 }
 
 .map-hero,
@@ -1242,6 +1306,8 @@ textarea {
   .map-hero,
   .owner-hero,
   .client-hero,
+  .trial-shell,
+  .trial-proof,
   .calc-gate,
   .gated-workspace,
   .map-summary,

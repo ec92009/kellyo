@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KellyO | 30-Day Trial</title>
+    <meta
+      name="description"
+      content="Request a 30-day KellyO trial for CPA-ready tax planning scenario previews."
+    >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=trial">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="KellyO home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>KellyO</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./">Preview</a>
+      </nav>
+      <a class="client-cta" href="./gate.html">Clients</a>
+      <a class="owner-cta" href="./clients.html?owner=1" data-owner-link hidden>Owner</a>
+    </header>
+
+    <main class="trial-page">
+      <section class="trial-shell" aria-labelledby="trial-title">
+        <div class="trial-copy">
+          <p class="eyebrow">30-day trial</p>
+          <h1 id="trial-title">Try KellyO free.</h1>
+          <p>
+            Start with a reviewer account for the protected planning workspace. The trial
+            is still a product preview while the workbook engine is being validated.
+          </p>
+          <div class="trial-proof">
+            <article>
+              <span>01</span>
+              <strong>Explore the protected workflow</strong>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Review CPA-facing assumptions</strong>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Shape the first paid product</strong>
+            </article>
+          </div>
+        </div>
+
+        <form class="preview-form trial-form" id="trial-form">
+          <p class="mini-label">Trial request</p>
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" required autocomplete="name">
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" required autocomplete="email">
+          </label>
+          <label>
+            <span>Firm or practice</span>
+            <input name="firm" type="text" autocomplete="organization">
+          </label>
+          <label>
+            <span>Client count</span>
+            <select name="clientCount">
+              <option>Just evaluating</option>
+              <option>1-10 planning clients</option>
+              <option>11-50 planning clients</option>
+              <option>50+ planning clients</option>
+            </select>
+          </label>
+          <label>
+            <span>What should the trial prove?</span>
+            <textarea name="notes" rows="4">I want to see whether KellyO can support CPA-reviewed scenario planning.</textarea>
+          </label>
+          <button class="button primary" type="submit">Request 30-day trial</button>
+          <p class="trial-message" id="trial-message" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KellyO</span>
+      <span>Trial access is a preview, not live tax software.</span>
+      <span><a href="./gate.html">Already have credentials?</a></span>
+    </footer>
+
+    <script src="owner-nav.js?v=owner-nav"></script>
+    <script src="trial.js?v=trial"></script>
+  </body>
+</html>
