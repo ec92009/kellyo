@@ -147,6 +147,28 @@ function populateQuickCalcControls() {
   });
 }
 
+function populateCoreProjectionControls() {
+  const statusSelect = byId("core-status");
+  const stateSelect = byId("core-state");
+  statusSelect.innerHTML = "";
+  taxParameters.filingStatuses.forEach((status) => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = status;
+    if (status === "Single") option.selected = true;
+    statusSelect.append(option);
+  });
+
+  stateSelect.innerHTML = "";
+  ["None", ...Object.keys(taxParameters.states).filter((state) => state !== "None").sort()].forEach((state) => {
+    const option = document.createElement("option");
+    option.value = state;
+    option.textContent = state;
+    if (state === "California") option.selected = true;
+    stateSelect.append(option);
+  });
+}
+
 function quickCalcInput() {
   return {
     filingStatus: byId("qc-status").value,
@@ -156,7 +178,28 @@ function quickCalcInput() {
   };
 }
 
+function coreProjectionInput() {
+  return {
+    filingStatus: byId("core-status").value,
+    state: byId("core-state").value,
+    wages: byId("core-wages").value,
+    payrollFicaWages: byId("core-fica-wages").value,
+    scheduleCIncome: byId("core-schedule-c").value,
+    k1Income: byId("core-k1").value,
+    longTermCapitalGains: byId("core-ltcg").value,
+    retirementContributions: byId("core-retirement").value,
+    augustaDeduction: byId("core-augusta").value,
+    accountablePlanDeduction: byId("core-accountable").value,
+    costSegAcceleratedDepreciation: byId("core-cost-seg").value,
+    saltPaid: byId("core-salt").value,
+  };
+}
+
 function setQuickCalcResult(id, value, formatterFn = currencyFormatter.format) {
+  byId(id).textContent = formatterFn(value);
+}
+
+function setCoreProjectionResult(id, value, formatterFn = currencyFormatter.format) {
   byId(id).textContent = formatterFn(value);
 }
 
@@ -173,6 +216,25 @@ function renderQuickCalc() {
   setQuickCalcResult("qc-marginal", result.federalMarginalRate, percentFormatter.format);
 }
 
+function renderCoreProjection() {
+  if (!taxParameters) return;
+  const result = window.KellyOTaxEngine.calculateCoreProjection(coreProjectionInput(), taxParameters);
+  setCoreProjectionResult("core-agi", result.adjustedGrossIncome);
+  setCoreProjectionResult("core-qbi", result.qbiDeduction);
+  setCoreProjectionResult(
+    "core-deduction",
+    `${currencyFormatter.format(result.deductionUsed)} ${result.deductionMethod === "itemized" ? "itemized" : "standard"}`,
+    (value) => value
+  );
+  setCoreProjectionResult("core-taxable", result.taxableIncome);
+  setCoreProjectionResult("core-federal-before", result.federalTaxBeforeCredits);
+  setCoreProjectionResult("core-state-tax", result.stateTax);
+  setCoreProjectionResult("core-combined-tax", result.combinedTax);
+  setCoreProjectionResult("core-quarterly", result.quarterlyInstallment);
+  setCoreProjectionResult("core-marginal", result.federalMarginalRate, percentFormatter.format);
+  setCoreProjectionResult("core-ebl", result.disallowedExcessBusinessLoss);
+}
+
 async function bindQuickCalc() {
   taxParameters = await window.KellyOTaxEngine.loadTaxParameters();
   populateQuickCalcControls();
@@ -187,10 +249,36 @@ async function bindQuickCalc() {
   renderQuickCalc();
 }
 
+function bindCoreProjection() {
+  populateCoreProjectionControls();
+  byId("core-calc-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    renderCoreProjection();
+  });
+  [
+    "core-status",
+    "core-state",
+    "core-wages",
+    "core-fica-wages",
+    "core-schedule-c",
+    "core-k1",
+    "core-ltcg",
+    "core-retirement",
+    "core-augusta",
+    "core-accountable",
+    "core-cost-seg",
+    "core-salt",
+  ].forEach((id) => {
+    byId(id).addEventListener("input", renderCoreProjection);
+    byId(id).addEventListener("change", renderCoreProjection);
+  });
+  renderCoreProjection();
+}
+
 function hydrateAccessState() {
   const access = window.KellyOGateAccess.getAccess();
   if (!access) return;
-  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Quick Calc is available for guided review. Full scenario calculations remain locked until workbook parity checks are complete.`;
+  byId("workspace-copy").textContent = `${access.label} has entered the protected workbook map. Quick Calc and the core planning slice are available for guided review. Full saved scenarios remain locked until more workbook modules are ported and CPA-tested.`;
 }
 
 async function loadWorkbookMap() {
@@ -201,6 +289,7 @@ async function loadWorkbookMap() {
   renderModules();
   bindControls();
   await bindQuickCalc();
+  bindCoreProjection();
 }
 
 loadWorkbookMap();

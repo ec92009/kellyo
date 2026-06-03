@@ -5,6 +5,10 @@
     "ordinaryBrackets": "Tax Parameters!B5:F11",
     "standardDeductions": "Tax Parameters!A14:B17",
     "longTermCapitalGainBands": "Tax Parameters!A21:C24",
+    "niitAndAdditionalMedicare": "Tax Parameters!A27:B47",
+    "qbi": "Tax Parameters!A34:C48",
+    "saltCap": "Tax Parameters!A65:C71",
+    "excessBusinessLoss": "Tax Parameters!A79:B82",
     "stateTable": "States!A8:E58",
     "specialStateQuickCalcBrackets": "Quick Calc!B17"
   },
@@ -204,6 +208,109 @@
         "fifteenTop": 306850,
         "source": "Tax Parameters!B24:C24"
       }
+    },
+    "niitAndAdditionalMedicare": {
+      "thresholds": {
+        "Single": {
+          "threshold": 200000,
+          "source": "Tax Parameters!B29"
+        },
+        "MFJ": {
+          "threshold": 250000,
+          "source": "Tax Parameters!B30"
+        },
+        "HoH": {
+          "threshold": 200000,
+          "source": "Tax Parameters!B31"
+        },
+        "MFS": {
+          "threshold": 125000,
+          "source": "Tax Parameters!B32"
+        }
+      },
+      "niitRate": 0.038,
+      "additionalMedicareRate": 0.009,
+      "source": "Tax Parameters!B29:B32,B46:B47"
+    },
+    "qbi": {
+      "phaseIn": {
+        "Single": {
+          "start": 201750,
+          "range": 75000,
+          "source": "Tax Parameters!B36:C36"
+        },
+        "MFJ": {
+          "start": 403500,
+          "range": 150000,
+          "source": "Tax Parameters!B37:C37"
+        },
+        "HoH": {
+          "start": 201750,
+          "range": 75000,
+          "source": "Tax Parameters!B38:C38"
+        },
+        "MFS": {
+          "start": 201775,
+          "range": 75000,
+          "source": "Tax Parameters!B39:C39"
+        }
+      },
+      "deductionRate": 0.2,
+      "source": "Tax Parameters!B36:C39,B48"
+    },
+    "selfEmploymentTax": {
+      "socialSecurityWageBase": 184500,
+      "socialSecurityRate": 0.124,
+      "medicareRate": 0.029,
+      "factor": 0.9235,
+      "source": "Tax Parameters!B42:B45"
+    },
+    "saltCap": {
+      "caps": {
+        "Single": {
+          "amount": 20200,
+          "source": "Tax Parameters!B67"
+        },
+        "MFJ": {
+          "amount": 40400,
+          "source": "Tax Parameters!B68"
+        },
+        "HoH": {
+          "amount": 20200,
+          "source": "Tax Parameters!B69"
+        },
+        "MFS": {
+          "amount": 10100,
+          "source": "Tax Parameters!B70"
+        }
+      },
+      "phaseDownThresholds": {
+        "Single": {
+          "amount": 252500.0,
+          "source": "SALT Cap Calculator!B17"
+        },
+        "MFJ": {
+          "amount": 505000,
+          "source": "Tax Parameters!B50"
+        },
+        "HoH": {
+          "amount": 252500.0,
+          "source": "SALT Cap Calculator!B17"
+        },
+        "MFS": {
+          "amount": 252500.0,
+          "source": "SALT Cap Calculator!B17"
+        }
+      },
+      "phaseDownRate": 0.3,
+      "defaultFloor": 10000.0,
+      "mfsFloor": 5000.0,
+      "source": "Tax Parameters!B49:B50,B67:B71; SALT Cap Calculator!B16:B21"
+    },
+    "excessBusinessLoss": {
+      "otherThreshold": 256000,
+      "mfjThreshold": 512000,
+      "source": "Tax Parameters!B81:B82"
     }
   },
   "states": {

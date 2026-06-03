@@ -1251,6 +1251,14 @@ textarea {
   align-items: start;
 }
 
+.engine-subsection {
+  display: grid;
+  gap: 22px;
+  margin-top: 58px;
+  padding-top: 42px;
+  border-top: 1px solid var(--line);
+}
+
 .engine-form,
 .engine-output-panel {
   border: 1px solid var(--line);
@@ -1262,6 +1270,12 @@ textarea {
   display: grid;
   gap: 14px;
   padding: 22px;
+}
+
+.engine-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .engine-form label {
@@ -1329,6 +1343,14 @@ textarea {
   display: block;
   margin-top: 12px;
   font-size: clamp(1.4rem, 3vw, 2.1rem);
+}
+
+.core-results div {
+  min-height: 94px;
+}
+
+.core-results strong {
+  font-size: clamp(1.1rem, 2vw, 1.65rem);
 }
 
 .locked-panels {
@@ -1841,6 +1863,7 @@ textarea {
   }
 
   .locked-panels,
+  .engine-field-grid,
   .engine-results,
   .module-stats,
   .io-grid {
@@ -1905,7 +1928,7 @@ textarea {
   }
 
   .theme-toggle span {
-    font-size: 0.62rem;
+    font-size: 0.52rem;
   }
 
   .brand span:last-child {

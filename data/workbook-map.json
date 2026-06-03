@@ -63,7 +63,7 @@
       "module": "Free public calculator",
       "category": "Calculator",
       "priority": "V1",
-      "status": "Formula port started",
+      "status": "Ready for expansion",
       "inputs": [
         "Filing status",
         "State",
@@ -75,7 +75,7 @@
         "State tax",
         "Combined effective rate"
       ],
-      "testFocus": "Compare the browser alpha against workbook Quick Calc cases, then decide whether it is safe as a lead magnet."
+      "testFocus": "Fixture-backed parity cases now cover federal brackets, LTCG stacking, special states, flat states, and no-tax states."
     },
     {
       "name": "Prior Year 2025",
@@ -108,7 +108,7 @@
       "module": "Core quarterly tax engine",
       "category": "Engine",
       "priority": "V1",
-      "status": "Needs formula port",
+      "status": "Formula port started",
       "inputs": [
         "Income rollups",
         "Adjustments",
@@ -123,7 +123,7 @@
         "State tax",
         "Quarterly estimates"
       ],
-      "testFocus": "This is the main golden-master test target: web output should match workbook scenarios."
+      "testFocus": "First browser slice now covers AGI, QBI, deductions, taxable income, pre-credit federal tax, state tax, and EBL carryforward checks."
     },
     {
       "name": "Profit and loss annualized - bu",
@@ -135,7 +135,7 @@
       "module": "Business income annualizer",
       "category": "Client inputs",
       "priority": "V1",
-      "status": "Needs formula port",
+      "status": "Formula port started",
       "inputs": [
         "Period-end date",
         "YTD Schedule C net",
@@ -168,7 +168,7 @@
         "Effective SALT cap",
         "Allowed SALT deduction"
       ],
-      "testFocus": "Check 2026 cap, phase-down, and minimum floor assumptions."
+      "testFocus": "Core projection uses the 2026 cap, phase-down, and minimum floor assumptions; dedicated edge fixtures still needed."
     },
     {
       "name": "QBI Calculator",

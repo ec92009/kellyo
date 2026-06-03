@@ -44,12 +44,13 @@ tabs.forEach((tab) => {
 document.getElementById("preview-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
+  const recipients = "kellycohen11@gmail.com,ec92009@gmail.com";
   const subject = encodeURIComponent("KellyO first-look review");
   const body = encodeURIComponent(
-    `Hi Kelly,\n\nI put together a first-look site for KellyO as a discussion springboard.\n\nReview focus: ${data.get(
+    `Hi KellyO team,\n\nI put together a first-look site for KellyO as a discussion springboard.\n\nReview focus: ${data.get(
       "focus"
     )}\n\nNotes: ${data.get("notes")}\n\nCan we review this together?\n`
   );
 
-  window.location.href = `mailto:kellycohen11@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${recipients}?subject=${subject}&body=${body}`;
 });

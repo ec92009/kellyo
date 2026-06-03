@@ -9,11 +9,11 @@
       content="Map the source quarterly tax workbook into KellyO web app modules, test priorities, and CPA review questions."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <script src="theme.js?v=95.0"></script>
-    <link rel="stylesheet" href="styles.css?v=95.0">
+    <script src="theme.js?v=95.1"></script>
+    <link rel="stylesheet" href="styles.css?v=95.1">
   </head>
   <body class="is-access-pending">
-    <script src="gate-access.js?v=95.0"></script>
+    <script src="gate-access.js?v=95.1"></script>
     <script>
       window.KellyOGateAccess.requireAccess({ redirectUrl: "./gate.html?next=map" });
     </script>
@@ -43,7 +43,7 @@
             <button class="account-logout" type="button" data-account-logout>Log out</button>
           </div>
         </div>
-        <span class="version-chip" data-site-version>v95.0</span>
+        <span class="version-chip" data-site-version>v95.1</span>
         <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
           <span>Day</span>
           <span>Night</span>
@@ -66,8 +66,8 @@
           <p class="mini-label">Protected workspace</p>
           <h2>Quick Calc is the first active slice.</h2>
           <p>
-            Use the module map and Quick Calc alpha to explore how the workbook is becoming
-            a structured planning workflow.
+            Use the module map, Quick Calc, and the first core planning slice to explore
+            how the workbook is becoming a structured planning workflow.
           </p>
           <div class="gate-actions">
             <a class="button primary" href="#engine-alpha">Try engine alpha</a>
@@ -103,6 +103,7 @@
             <ul>
               <li>Protected workbook map loads after client sign-in.</li>
               <li>Quick Calc alpha runs in the browser.</li>
+              <li>Core AGI, deduction, taxable-income, and pre-credit federal tax slice is live.</li>
               <li>Workbook tabs are mapped into product modules.</li>
             </ul>
           </article>
@@ -110,6 +111,7 @@
             <h3>What's under test</h3>
             <ul>
               <li>Federal ordinary tax and capital-gains stacking behavior.</li>
+              <li>AGI, QBI, SALT cap, EBL limit, and taxable-income rollups.</li>
               <li>State-tax approximations for selected states.</li>
               <li>Workbook parity tests for CPA acceptance scenarios.</li>
             </ul>
@@ -130,8 +132,9 @@
           <p class="mini-label">Protected workspace</p>
           <h2 id="workspace-title">Engine alpha workspace</h2>
           <p id="workspace-copy">
-            Quick Calc is now running as the first browser-side formula port. Full scenario
-            calculations remain withheld until the workbook formulas are ported and CPA-tested.
+            Quick Calc and the first core planning slice are running as browser-side formula
+            ports. Full saved scenarios remain withheld until more workbook modules are
+            ported and CPA-tested.
           </p>
         </div>
         <div class="locked-panels" aria-label="Calculation status">
@@ -141,14 +144,14 @@
             <p>Federal, LTCG, and state approximation are ported first.</p>
           </article>
           <article>
-            <span>Ready</span>
-            <h3>Workbook map</h3>
-            <p>Tab-to-module review is available.</p>
+            <span>Alpha</span>
+            <h3>Core projection</h3>
+            <p>AGI, QBI, deductions, taxable income, and pre-credit federal tax are ported.</p>
           </article>
           <article>
-            <span>Next</span>
+            <span>Tested</span>
             <h3>Golden tests</h3>
-            <p>Kelly can add CPA acceptance scenarios.</p>
+            <p>Fixture checks now cover Quick Calc and workbook QA scenarios.</p>
           </article>
         </div>
       </section>
@@ -226,6 +229,123 @@
             </div>
           </div>
         </div>
+
+        <div class="engine-subsection" id="core-projection">
+          <div class="section-heading">
+            <h2>Core planning slice is now executable.</h2>
+            <p>
+              This next slice follows the Qtrly Calc rollup: income to AGI, adjustments,
+              QBI, standard or itemized deductions, taxable income, and federal tax before
+              credits. The default case mirrors the first workbook QA scenario.
+            </p>
+          </div>
+
+          <div class="engine-alpha-grid">
+            <form class="engine-form" id="core-calc-form">
+              <div class="engine-field-grid">
+                <label>
+                  <span>Filing status</span>
+                  <select id="core-status" name="filingStatus"></select>
+                </label>
+                <label>
+                  <span>State</span>
+                  <select id="core-state" name="state"></select>
+                </label>
+                <label>
+                  <span>W-2 wages</span>
+                  <input id="core-wages" name="wages" type="number" min="0" step="1000" value="200000">
+                </label>
+                <label>
+                  <span>FICA wages</span>
+                  <input id="core-fica-wages" name="payrollFicaWages" type="number" min="0" step="1000" value="200000">
+                </label>
+                <label>
+                  <span>Schedule C income</span>
+                  <input id="core-schedule-c" name="scheduleCIncome" type="number" step="1000" value="0">
+                </label>
+                <label>
+                  <span>K-1 income</span>
+                  <input id="core-k1" name="k1Income" type="number" step="1000" value="250000">
+                </label>
+                <label>
+                  <span>LTCG / qualified dividends</span>
+                  <input id="core-ltcg" name="longTermCapitalGains" type="number" min="0" step="1000" value="0">
+                </label>
+                <label>
+                  <span>Retirement contribution</span>
+                  <input id="core-retirement" name="retirementContributions" type="number" min="0" step="1000" value="50000">
+                </label>
+                <label>
+                  <span>Augusta deduction</span>
+                  <input id="core-augusta" name="augustaDeduction" type="number" min="0" step="500" value="10500">
+                </label>
+                <label>
+                  <span>Accountable plan</span>
+                  <input id="core-accountable" name="accountablePlanDeduction" type="number" min="0" step="500" value="10000">
+                </label>
+                <label>
+                  <span>Cost seg / bonus dep.</span>
+                  <input id="core-cost-seg" name="costSegAcceleratedDepreciation" type="number" min="0" step="1000" value="0">
+                </label>
+                <label>
+                  <span>SALT paid</span>
+                  <input id="core-salt" name="saltPaid" type="number" min="0" step="1000" value="0">
+                </label>
+              </div>
+              <button class="button primary" type="submit">Run core slice</button>
+              <p class="engine-note">
+                Source: Qtrly Calc, Tax Parameters, SALT Cap Calculator, and QA Scenario
+                Tests tabs. This is a review build, not tax advice.
+              </p>
+            </form>
+
+            <div class="engine-output-panel" aria-live="polite">
+              <p class="mini-label">Core outputs</p>
+              <div class="engine-results core-results">
+                <div>
+                  <span>AGI</span>
+                  <strong id="core-agi">$0</strong>
+                </div>
+                <div>
+                  <span>QBI deduction</span>
+                  <strong id="core-qbi">$0</strong>
+                </div>
+                <div>
+                  <span>Deduction used</span>
+                  <strong id="core-deduction">$0</strong>
+                </div>
+                <div>
+                  <span>Taxable income</span>
+                  <strong id="core-taxable">$0</strong>
+                </div>
+                <div>
+                  <span>Federal before credits</span>
+                  <strong id="core-federal-before">$0</strong>
+                </div>
+                <div>
+                  <span>State tax</span>
+                  <strong id="core-state-tax">$0</strong>
+                </div>
+                <div class="emphasis">
+                  <span>Combined tax</span>
+                  <strong id="core-combined-tax">$0</strong>
+                </div>
+                <div>
+                  <span>Quarterly installment</span>
+                  <strong id="core-quarterly">$0</strong>
+                </div>
+                <div>
+                  <span>Federal marginal rate</span>
+                  <strong id="core-marginal">0.0%</strong>
+                </div>
+                <div>
+                  <span>EBL carryforward</span>
+                  <strong id="core-ebl">$0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="map-summary" aria-label="Workbook summary">
@@ -272,15 +392,15 @@
 
     <footer class="site-footer">
       <span>KellyO</span>
-      <span>Workbook map only. Calculations not live yet.</span>
+      <span>Engine alpha only. Calculations require CPA review.</span>
       <span>Protected by client sign-in.</span>
     </footer>
 
-    <script src="owner-nav.js?v=95.0"></script>
-    <script src="version.js?v=95.0"></script>
-    <script src="status-panel.js?v=95.0"></script>
-    <script src="tax-engine.js?v=95.0"></script>
-    <script src="map.js?v=95.0"></script>
+    <script src="owner-nav.js?v=95.1"></script>
+    <script src="version.js?v=95.1"></script>
+    <script src="status-panel.js?v=95.1"></script>
+    <script src="tax-engine.js?v=95.1"></script>
+    <script src="map.js?v=95.1"></script>
     <script>
       window.KellyOGateAccess.bindAccountMenu();
     </script>
