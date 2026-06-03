@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KOxcel | Scenario tax planning for owner-led clients</title>
+    <meta
+      name="description"
+      content="KOxcel turns advanced tax-planning spreadsheets into CPA-ready scenario modeling, quarterly estimates, and client reports."
+    >
+    <meta property="og:title" content="KOxcel">
+    <meta
+      property="og:description"
+      content="Scenario tax planning for CPAs, EAs, and advisory firms serving business owners."
+    >
+    <meta property="og:image" content="assets/hero-dashboard.png">
+    <link rel="preload" href="assets/hero-dashboard.png" as="image">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="KOxcel home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>KOxcel</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#engine">Engine</a>
+        <a href="#strategies">Strategies</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#preview">Preview</a>
+      </nav>
+      <a class="nav-cta" href="#preview">Early access</a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">From ambitious workbook to advisor-ready web app</p>
+          <h1 id="hero-title">KOxcel</h1>
+          <p class="hero-copy">
+            Scenario tax planning for CPAs and advisors who need to compare S corp elections,
+            retirement moves, PTET, real estate strategies, and quarterly payments without
+            wrangling a 32-tab spreadsheet in front of a client.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#engine">See the product shape</a>
+            <a class="button secondary" href="#preview">Start a Kelly review</a>
+          </div>
+          <dl class="hero-metrics" aria-label="Workbook conversion snapshot">
+            <div>
+              <dt>32</dt>
+              <dd>Workbook tabs mapped</dd>
+            </div>
+            <div>
+              <dt>1,221</dt>
+              <dd>Formula cells to test</dd>
+            </div>
+            <div>
+              <dt>3</dt>
+              <dd>Scenarios side by side</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="signal-strip" aria-label="Product positioning">
+        <div>
+          <span class="label">For</span>
+          <strong>CPAs, EAs, tax strategists, and advisory firms</strong>
+        </div>
+        <div>
+          <span class="label">Focus</span>
+          <strong>Planning estimates, not tax filing</strong>
+        </div>
+        <div>
+          <span class="label">First buyer</span>
+          <strong>Professionals serving high-income owner clients</strong>
+        </div>
+      </section>
+
+      <section class="section product-section" id="engine" aria-labelledby="engine-title">
+        <div class="section-kicker">Product springboard</div>
+        <div class="section-heading">
+          <h2 id="engine-title">A planning workspace, not a spreadsheet clone.</h2>
+          <p>
+            The first app should preserve the workbook's calculation depth while replacing
+            tabs, toggles, and hidden dependencies with a guided client conversation.
+          </p>
+        </div>
+
+        <div class="workspace-grid">
+          <div class="scenario-board" aria-label="Scenario comparison preview">
+            <div class="board-top">
+              <div>
+                <p class="mini-label">Client scenario</p>
+                <h3>Owner-led services business</h3>
+              </div>
+              <span class="status-pill">Draft estimate</span>
+            </div>
+            <div class="scenario-tabs" role="tablist" aria-label="Scenario options">
+              <button class="tab is-active" type="button" data-scenario="baseline">Baseline</button>
+              <button class="tab" type="button" data-scenario="owner">Owner comp</button>
+              <button class="tab" type="button" data-scenario="stack">Real estate stack</button>
+            </div>
+            <div class="scenario-content" aria-live="polite">
+              <div class="kpi-row">
+                <div>
+                  <span class="mini-label">Combined tax</span>
+                  <strong id="tax-total">$184,200</strong>
+                </div>
+                <div>
+                  <span class="mini-label">Tax saved</span>
+                  <strong id="tax-saved">$0</strong>
+                </div>
+                <div>
+                  <span class="mini-label">Q3 estimate</span>
+                  <strong id="q3-payment">$46,050</strong>
+                </div>
+              </div>
+              <p id="scenario-note">
+                Starting point with projected W-2, K-1, Schedule C income, state tax, and
+                equal quarterly installments.
+              </p>
+              <div class="bar-chart" aria-hidden="true">
+                <span class="bar baseline"></span>
+                <span class="bar owner"></span>
+                <span class="bar stack"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="decision-panel">
+            <p class="mini-label">Advisor flow</p>
+            <h3>Turn each tab into a clean decision.</h3>
+            <ul class="check-list">
+              <li>Capture assumptions once in a client profile.</li>
+              <li>Apply strategies as named scenario modules.</li>
+              <li>Show tax before, tax after, and quarter-by-quarter due dates.</li>
+              <li>Export a client-ready report with caveats and source notes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted" id="strategies" aria-labelledby="strategy-title">
+        <div class="section-kicker">Modules</div>
+        <div class="section-heading">
+          <h2 id="strategy-title">Start with the strategies Kelly can validate fastest.</h2>
+          <p>
+            The workbook has enough depth for a broad platform, but the first release should
+            prove the scenario engine with a focused set of high-value planning moves.
+          </p>
+        </div>
+
+        <div class="strategy-grid">
+          <article>
+            <span>01</span>
+            <h3>S corp election</h3>
+            <p>Reasonable salary, distributions, payroll tax savings, and compliance costs.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Retirement plans</h3>
+            <p>Solo 401(k), SEP, SIMPLE, defined benefit, and payroll deferral coordination.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>PTET and SALT</h3>
+            <p>Pass-through entity tax, SALT cap impact, and state-specific planning limits.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Real estate stack</h3>
+            <p>Cost segregation, accelerated depreciation, passive loss treatment, and EBL checks.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Owner reimbursements</h3>
+            <p>Augusta Rule, accountable plan, home office, and family management strategy inputs.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Client report</h3>
+            <p>Plain-English summary of savings, quarterly payments, caveats, and next actions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section economics" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-kicker">Commercial shape</div>
+        <div class="section-heading">
+          <h2 id="pricing-title">Monetize the professional workflow first.</h2>
+          <p>
+            Free calculators can attract traffic, but paid value lives in saved clients,
+            repeatable scenarios, defensible assumptions, and polished reports.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="pricing-plan">
+            <p class="mini-label">Starter</p>
+            <h3>$49/mo</h3>
+            <p>Solo advisor experimenting with quarterly estimates and a few strategy modules.</p>
+          </article>
+          <article class="pricing-plan featured">
+            <p class="mini-label">Practice</p>
+            <h3>$199/mo</h3>
+            <p>Saved clients, scenario comparisons, PDF reports, and professional disclaimers.</p>
+          </article>
+          <article class="pricing-plan">
+            <p class="mini-label">Firm</p>
+            <h3>$699+/mo</h3>
+            <p>Team seats, audit logs, review workflows, and custom reporting templates.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section preview" id="preview" aria-labelledby="preview-title">
+        <div class="preview-copy">
+          <div class="section-kicker">Kelly review</div>
+          <h2 id="preview-title">Use this as the first conversation piece.</h2>
+          <p>
+            The first review should answer three questions: what would a CPA trust, what
+            should never be automated blindly, and which client scenario is worth building first?
+          </p>
+        </div>
+        <form class="preview-form" id="preview-form">
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" value="Kelly Cohen">
+          </label>
+          <label>
+            <span>Review focus</span>
+            <select name="focus">
+              <option>CPA validation of scenario logic</option>
+              <option>Which strategy modules should be first</option>
+              <option>Client report format</option>
+              <option>Pricing and buyer persona</option>
+            </select>
+          </label>
+          <label>
+            <span>Notes</span>
+            <textarea name="notes" rows="4">Let's review the scenario comparison flow and decide what has to be true for a CPA to trust it.</textarea>
+          </label>
+          <button class="button primary" type="submit">Draft review email</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KOxcel</span>
+      <span>Planning estimates only. Not tax filing software.</span>
+      <span>Built from the 2026 quarterly tax workbook.</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
