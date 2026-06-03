@@ -44,13 +44,12 @@ tabs.forEach((tab) => {
 document.getElementById("preview-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  const subject = encodeURIComponent("KOxcel first-look review");
+  const subject = encodeURIComponent("KellyO first-look review");
   const body = encodeURIComponent(
-    `Hi Kelly,\n\nI put together a first-look site for KOxcel as a discussion springboard.\n\nReview focus: ${data.get(
+    `Hi Kelly,\n\nI put together a first-look site for KellyO as a discussion springboard.\n\nReview focus: ${data.get(
       "focus"
     )}\n\nNotes: ${data.get("notes")}\n\nCan we review this together?\n`
   );
 
   window.location.href = `mailto:kellycohen11@gmail.com?subject=${subject}&body=${body}`;
 });
-
