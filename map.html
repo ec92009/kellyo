@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KellyO | Workbook Map</title>
+    <meta
+      name="description"
+      content="Map the source quarterly tax workbook into KellyO web app modules, test priorities, and CPA review questions."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="KellyO home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>KellyO</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./">Preview</a>
+        <a href="./map.html" aria-current="page">Workbook Map</a>
+        <a href="./clients.html">Clients</a>
+        <a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comments</a>
+      </nav>
+      <a class="nav-cta" href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comment</a>
+    </header>
+
+    <main class="map-page">
+      <section class="map-hero">
+        <div class="map-hero-copy">
+          <p class="eyebrow">CPA review surface</p>
+          <h1>Workbook Map</h1>
+          <p>
+            A tab-by-tab translation of Kelly's spreadsheet into web app modules,
+            implementation status, and test priorities. The current site is still a
+            product preview; this page shows what must become executable next.
+          </p>
+        </div>
+        <div class="map-status-panel">
+          <p class="mini-label">Current truth</p>
+          <h2>Not a tax engine yet.</h2>
+          <p>
+            The workbook is the source model. KellyO needs a tested calculation engine
+            before any browser output should be treated as tax planning math.
+          </p>
+          <div class="gate-actions">
+            <a class="button primary" href="#qa-path">Review test path</a>
+            <a class="button secondary dark" href="#gate">Open mock gate</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="calc-gate" id="gate" aria-labelledby="gate-title">
+        <div class="gate-copy">
+          <p class="section-kicker">Access boundary</p>
+          <h2 id="gate-title">Calculation workspace is gated.</h2>
+          <p>
+            Public visitors can inspect the product concept and workbook map. Anything that
+            looks like tax math belongs behind reviewer access until the formula engine is
+            ported, tested, and approved.
+          </p>
+        </div>
+        <form class="gate-form" id="gate-form">
+          <label>
+            <span>Username</span>
+            <input name="username" type="text" placeholder="Client username" autocomplete="username">
+          </label>
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Paywall password" autocomplete="current-password">
+          </label>
+          <button class="button primary" type="submit">Pass mock paywall</button>
+          <p id="gate-message" class="gate-message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="gated-workspace is-locked" id="gated-workspace" aria-labelledby="workspace-title">
+        <div>
+          <p class="mini-label">Reviewer-only mock</p>
+          <h2 id="workspace-title">Test lab placeholder</h2>
+          <p id="workspace-copy">
+            This is where live scenario calculations will appear after the TypeScript engine
+            is built and matched against workbook golden tests.
+          </p>
+        </div>
+        <div class="locked-panels" aria-label="Calculation status">
+          <article>
+            <span>Locked</span>
+            <h3>Core tax engine</h3>
+            <p>Formula port not complete.</p>
+          </article>
+          <article>
+            <span>Ready</span>
+            <h3>Workbook map</h3>
+            <p>Tab-to-module review is available.</p>
+          </article>
+          <article>
+            <span>Next</span>
+            <h3>Golden tests</h3>
+            <p>Kelly can add CPA acceptance scenarios.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="map-summary" aria-label="Workbook summary">
+        <div>
+          <span id="sheet-count">32</span>
+          <p>Workbook tabs</p>
+        </div>
+        <div>
+          <span id="formula-count">1,221</span>
+          <p>Formula cells</p>
+        </div>
+        <div>
+          <span id="validation-count">40</span>
+          <p>Validation rules</p>
+        </div>
+        <div>
+          <span id="v1-count">0</span>
+          <p>V1 candidates</p>
+        </div>
+      </section>
+
+      <section class="section map-section" id="qa-path" aria-labelledby="qa-title">
+        <div class="section-kicker">Kelly test path</div>
+        <div class="section-heading">
+          <h2 id="qa-title">What she can test first.</h2>
+          <p>
+            The first CPA review should focus on trust boundaries: assumptions, caveats,
+            module order, and golden scenarios that the future web engine must match.
+          </p>
+        </div>
+
+        <div class="qa-grid">
+          <article>
+            <span>01</span>
+            <h3>Validate the map</h3>
+            <p>Confirm every workbook tab is assigned to the right web module, buyer workflow, and priority.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Add golden scenarios</h3>
+            <p>Expand the QA Scenario Tests rows with cases Kelly would use to trust or reject the engine.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Mark dangerous automation</h3>
+            <p>Identify strategies that require human review, substantiation, or stronger disclaimers.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Approve the MVP order</h3>
+            <p>Choose which V1 modules are sellable first and which ones should stay as future backlog.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section muted map-section" aria-labelledby="module-title">
+        <div class="section-kicker">Tab-to-module map</div>
+        <div class="section-heading map-controls-heading">
+          <h2 id="module-title">Every tab has a product destination.</h2>
+          <div class="map-controls">
+            <label class="search-field">
+              <span>Search</span>
+              <input id="module-search" type="search" placeholder="S corp, QBI, payroll...">
+            </label>
+            <div class="filter-row" aria-label="Filter modules">
+              <button class="filter-chip is-active" type="button" data-filter="All">All</button>
+              <button class="filter-chip" type="button" data-filter="V1">V1</button>
+              <button class="filter-chip" type="button" data-filter="Engine">Engine</button>
+              <button class="filter-chip" type="button" data-filter="Strategy">Strategy</button>
+              <button class="filter-chip" type="button" data-filter="Future">Future</button>
+            </div>
+          </div>
+        </div>
+        <div id="module-grid" class="module-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="section map-section" aria-labelledby="scenario-title">
+        <div class="section-kicker">Golden tests</div>
+        <div class="section-heading">
+          <h2 id="scenario-title">Workbook scenarios become acceptance tests.</h2>
+          <p>
+            These rows are pulled from the workbook's QA Scenario Tests tab. The web engine
+            should reproduce these outcomes before we let anyone rely on calculated outputs.
+          </p>
+        </div>
+        <div id="scenario-list" class="scenario-list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KellyO</span>
+      <span>Workbook map only. Calculations not live yet.</span>
+      <span><a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Leave review notes</a></span>
+    </footer>
+
+    <script src="map.js"></script>
+  </body>
+</html>

@@ -1,0 +1,778 @@
+{
+  "summary": {
+    "workbookFile": "QuarterlyTaxCalc_2026_v50.xlsx",
+    "sheetCount": 32,
+    "formulaCells": 1221,
+    "validations": 40,
+    "v1Modules": 20,
+    "mappedInSite": 9
+  },
+  "sheets": [
+    {
+      "name": "Start Here",
+      "dimension": "A1:E67",
+      "populatedCells": 129,
+      "formulaCells": 0,
+      "validations": 0,
+      "mergedRanges": 29,
+      "module": "Product onboarding",
+      "category": "Foundation",
+      "priority": "Reference",
+      "status": "Mapped",
+      "inputs": [
+        "Workflow notes",
+        "Color legend",
+        "Workbook caveats"
+      ],
+      "outputs": [
+        "Implementation checklist",
+        "Reviewer orientation"
+      ],
+      "testFocus": "Confirm the web app preserves the workbook's intended workflow and warnings."
+    },
+    {
+      "name": "Tax Savings Summary",
+      "dimension": "A1:H62",
+      "populatedCells": 222,
+      "formulaCells": 100,
+      "validations": 0,
+      "mergedRanges": 0,
+      "module": "Advisor dashboard",
+      "category": "Dashboard",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Client profile",
+        "Selected strategies",
+        "Core tax engine outputs"
+      ],
+      "outputs": [
+        "Applied savings",
+        "Potential savings",
+        "Combined tax with and without strategies"
+      ],
+      "testFocus": "Verify the dashboard explains savings without overstating precision or advice."
+    },
+    {
+      "name": "Quick Calc",
+      "dimension": "A1:F26",
+      "populatedCells": 36,
+      "formulaCells": 11,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Free public calculator",
+      "category": "Calculator",
+      "priority": "V1",
+      "status": "Needs engine",
+      "inputs": [
+        "Filing status",
+        "State",
+        "Taxable income",
+        "Capital gains"
+      ],
+      "outputs": [
+        "Federal tax",
+        "State tax",
+        "Combined effective rate"
+      ],
+      "testFocus": "Check bracket math, state approximations, and whether this is safe as a lead magnet."
+    },
+    {
+      "name": "Prior Year 2025",
+      "dimension": "A1:E123",
+      "populatedCells": 355,
+      "formulaCells": 195,
+      "validations": 1,
+      "mergedRanges": 5,
+      "module": "Prior-year comparison",
+      "category": "Reporting",
+      "priority": "V1.5",
+      "status": "Needs spec",
+      "inputs": [
+        "2025 actual tax return values",
+        "2026 projected values"
+      ],
+      "outputs": [
+        "Year-over-year variance",
+        "Refund or amount due comparison"
+      ],
+      "testFocus": "Decide which prior-year fields are required for estimates versus optional reporting."
+    },
+    {
+      "name": "Qtrly Calc",
+      "dimension": "A1:N66",
+      "populatedCells": 491,
+      "formulaCells": 299,
+      "validations": 3,
+      "mergedRanges": 2,
+      "module": "Core quarterly tax engine",
+      "category": "Engine",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "Income rollups",
+        "Adjustments",
+        "Deductions",
+        "Credits",
+        "Withholding"
+      ],
+      "outputs": [
+        "AGI",
+        "Taxable income",
+        "Federal tax",
+        "State tax",
+        "Quarterly estimates"
+      ],
+      "testFocus": "This is the main golden-master test target: web output should match workbook scenarios."
+    },
+    {
+      "name": "Profit and loss annualized - bu",
+      "dimension": "A1:F66",
+      "populatedCells": 130,
+      "formulaCells": 54,
+      "validations": 4,
+      "mergedRanges": 1,
+      "module": "Business income annualizer",
+      "category": "Client inputs",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "Period-end date",
+        "YTD Schedule C net",
+        "K-1 values",
+        "C-corp tracking"
+      ],
+      "outputs": [
+        "Annualized business income",
+        "Remaining-year projection"
+      ],
+      "testFocus": "Validate date-driven annualization and prevent duplicate business income."
+    },
+    {
+      "name": "SALT Cap Calculator",
+      "dimension": "A1:F23",
+      "populatedCells": 45,
+      "formulaCells": 13,
+      "validations": 0,
+      "mergedRanges": 0,
+      "module": "SALT cap sub-engine",
+      "category": "Engine",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "Filing status",
+        "AGI/MAGI proxy",
+        "SALT paid"
+      ],
+      "outputs": [
+        "Effective SALT cap",
+        "Allowed SALT deduction"
+      ],
+      "testFocus": "Check 2026 cap, phase-down, and minimum floor assumptions."
+    },
+    {
+      "name": "QBI Calculator",
+      "dimension": "A1:F42",
+      "populatedCells": 87,
+      "formulaCells": 34,
+      "validations": 1,
+      "mergedRanges": 5,
+      "module": "QBI sub-engine",
+      "category": "Engine",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "QBI",
+        "W-2 wages",
+        "UBIA",
+        "SSTB flag",
+        "Taxable income"
+      ],
+      "outputs": [
+        "QBI deduction",
+        "Limitation status"
+      ],
+      "testFocus": "Validate threshold/range behavior and edge cases for high-income clients."
+    },
+    {
+      "name": "Payroll - annualized",
+      "dimension": "A1:O39",
+      "populatedCells": 222,
+      "formulaCells": 78,
+      "validations": 4,
+      "mergedRanges": 2,
+      "module": "Payroll annualizer",
+      "category": "Client inputs",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "Paystub date",
+        "YTD gross",
+        "Box 1 wages",
+        "FICA wages",
+        "Withholding",
+        "Deferrals"
+      ],
+      "outputs": [
+        "Annualized wages",
+        "Annualized withholding",
+        "Retirement/HSA coordination"
+      ],
+      "testFocus": "Confirm payroll deferrals are not deducted twice in retirement or HSA modules."
+    },
+    {
+      "name": "Tax Parameters",
+      "dimension": "A1:H86",
+      "populatedCells": 181,
+      "formulaCells": 0,
+      "validations": 0,
+      "mergedRanges": 7,
+      "module": "Tax-year constants",
+      "category": "Reference data",
+      "priority": "V1",
+      "status": "Needs versioning",
+      "inputs": [
+        "2026 brackets",
+        "Thresholds",
+        "Limits"
+      ],
+      "outputs": [
+        "Versioned constants used by the engine"
+      ],
+      "testFocus": "Confirm sources, dates, and whether Kelly wants a CPA sign-off workflow for updates."
+    },
+    {
+      "name": "States",
+      "dimension": "A1:E58",
+      "populatedCells": 218,
+      "formulaCells": 4,
+      "validations": 1,
+      "mergedRanges": 1,
+      "module": "State selector and rate table",
+      "category": "Reference data",
+      "priority": "V1",
+      "status": "Needs state policy",
+      "inputs": [
+        "State",
+        "Representative rates",
+        "NYC borough"
+      ],
+      "outputs": [
+        "State tax estimate",
+        "PTET defaults"
+      ],
+      "testFocus": "Separate precise states from approximate states so the UI does not imply false certainty."
+    },
+    {
+      "name": "Augusta",
+      "dimension": "A1:C30",
+      "populatedCells": 34,
+      "formulaCells": 10,
+      "validations": 1,
+      "mergedRanges": 5,
+      "module": "Augusta Rule strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Rental days",
+        "Fair market rent",
+        "Business purpose",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Deduction",
+        "Federal savings",
+        "State savings"
+      ],
+      "testFocus": "Add documentation guardrails: FMV support, board minutes, agenda, and payment trail."
+    },
+    {
+      "name": "Accountable",
+      "dimension": "A1:E70",
+      "populatedCells": 103,
+      "formulaCells": 19,
+      "validations": 1,
+      "mergedRanges": 0,
+      "module": "Accountable plan strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Home office percentage",
+        "Eligible expenses",
+        "Reimbursement amount",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Reimbursement deduction",
+        "Tax savings"
+      ],
+      "testFocus": "Confirm substantiation requirements and no double-dip treatment."
+    },
+    {
+      "name": "Roth Conversion",
+      "dimension": "A1:F32",
+      "populatedCells": 39,
+      "formulaCells": 11,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Roth conversion planner",
+      "category": "Strategy",
+      "priority": "V1.5",
+      "status": "Needs spec",
+      "inputs": [
+        "Conversion amount",
+        "Current bracket",
+        "Future bracket assumptions"
+      ],
+      "outputs": [
+        "Current-year tax cost",
+        "Projected long-term benefit"
+      ],
+      "testFocus": "Decide whether long-term value is in scope for a tax-estimate MVP."
+    },
+    {
+      "name": "Cost Seg",
+      "dimension": "A1:C31",
+      "populatedCells": 37,
+      "formulaCells": 10,
+      "validations": 1,
+      "mergedRanges": 5,
+      "module": "Cost segregation strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Property basis",
+        "Reclassified property",
+        "Study cost",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Depreciation deduction",
+        "Tax savings net of study cost"
+      ],
+      "testFocus": "Validate interaction with passive loss rules and excess business loss limits."
+    },
+    {
+      "name": "Accelerated Depreciation",
+      "dimension": "A1:C34",
+      "populatedCells": 58,
+      "formulaCells": 15,
+      "validations": 2,
+      "mergedRanges": 0,
+      "module": "Accelerated depreciation strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Asset cost",
+        "Placed-in-service date",
+        "Active/passive classification",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Allowed current-year deduction",
+        "Disallowed carryforward"
+      ],
+      "testFocus": "Check Section 179/bonus assumptions and active/passive treatment."
+    },
+    {
+      "name": "Family Mgmt",
+      "dimension": "A1:E37",
+      "populatedCells": 57,
+      "formulaCells": 21,
+      "validations": 1,
+      "mergedRanges": 5,
+      "module": "Family management strategy",
+      "category": "Strategy",
+      "priority": "V1.5",
+      "status": "Needs spec",
+      "inputs": [
+        "Child wages",
+        "Entity costs",
+        "Payroll taxes",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Net deduction",
+        "Child tax impact",
+        "Tax savings"
+      ],
+      "testFocus": "Clarify compliance, reasonable compensation, and payroll setup caveats."
+    },
+    {
+      "name": "DAF",
+      "dimension": "A1:C29",
+      "populatedCells": 52,
+      "formulaCells": 13,
+      "validations": 2,
+      "mergedRanges": 4,
+      "module": "Donor-advised fund strategy",
+      "category": "Strategy",
+      "priority": "V1.5",
+      "status": "Needs spec",
+      "inputs": [
+        "Cash gift",
+        "Appreciated stock gift",
+        "Basis",
+        "AGI limits"
+      ],
+      "outputs": [
+        "Charitable deduction",
+        "Capital gains avoided",
+        "NIIT effect"
+      ],
+      "testFocus": "Decide how much charitable limitation logic belongs in v1."
+    },
+    {
+      "name": "Bunching Strategy",
+      "dimension": "A1:G46",
+      "populatedCells": 107,
+      "formulaCells": 51,
+      "validations": 1,
+      "mergedRanges": 11,
+      "module": "SALT and charitable bunching",
+      "category": "Strategy",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Alternate-year SALT",
+        "Charitable giving",
+        "Standard deduction year"
+      ],
+      "outputs": [
+        "Bunching benefit",
+        "Best-year recommendation"
+      ],
+      "testFocus": "Later module after core itemized/standard deduction behavior is stable."
+    },
+    {
+      "name": "PTE",
+      "dimension": "A1:F48",
+      "populatedCells": 77,
+      "formulaCells": 24,
+      "validations": 1,
+      "mergedRanges": 0,
+      "module": "PTET strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Entity income",
+        "State",
+        "PTET rate",
+        "Apply toggle"
+      ],
+      "outputs": [
+        "Entity-level tax",
+        "Federal deduction benefit",
+        "State tax impact"
+      ],
+      "testFocus": "Confirm state-by-state assumptions and when PTET is advisory-only."
+    },
+    {
+      "name": "S Corp election",
+      "dimension": "A1:N42",
+      "populatedCells": 74,
+      "formulaCells": 20,
+      "validations": 3,
+      "mergedRanges": 0,
+      "module": "S corp scenario planner",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Business net income",
+        "Reasonable salary",
+        "Distribution split",
+        "Compliance cost"
+      ],
+      "outputs": [
+        "Payroll tax savings",
+        "Net tax impact",
+        "Reclassification notes"
+      ],
+      "testFocus": "Validate multi-business handling and avoid a global switch that zeroes other Schedule C income."
+    },
+    {
+      "name": "Retirement",
+      "dimension": "A1:F40",
+      "populatedCells": 78,
+      "formulaCells": 16,
+      "validations": 2,
+      "mergedRanges": 5,
+      "module": "Retirement plan strategy",
+      "category": "Strategy",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Plan type",
+        "Age/DOB",
+        "Payroll deferrals",
+        "Employer contribution assumptions"
+      ],
+      "outputs": [
+        "Additional deduction capacity",
+        "Tax savings"
+      ],
+      "testFocus": "Coordinate payroll deferrals and catch-up logic without double counting."
+    },
+    {
+      "name": "Sale of principal property",
+      "dimension": "A1:F26",
+      "populatedCells": 45,
+      "formulaCells": 11,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Principal residence sale event",
+      "category": "Tax event",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Sale price",
+        "Basis",
+        "Sec 121 eligibility",
+        "Selling costs"
+      ],
+      "outputs": [
+        "Taxable gain",
+        "Exclusion amount",
+        "Estimated tax cost"
+      ],
+      "testFocus": "Later event module; keep separate from recurring quarterly planning MVP."
+    },
+    {
+      "name": "Real Estate Income",
+      "dimension": "A1:F27",
+      "populatedCells": 63,
+      "formulaCells": 19,
+      "validations": 1,
+      "mergedRanges": 0,
+      "module": "Real estate income and loss classifier",
+      "category": "Client inputs",
+      "priority": "V1",
+      "status": "Mapped in site",
+      "inputs": [
+        "Property income/loss",
+        "Active participation",
+        "REP status",
+        "Passive classification"
+      ],
+      "outputs": [
+        "Allowed current-year loss",
+        "Suspended passive loss"
+      ],
+      "testFocus": "Confirm passive/active/REP treatment before cost segregation recommendations."
+    },
+    {
+      "name": "Sale of real estate property",
+      "dimension": "A1:F26",
+      "populatedCells": 44,
+      "formulaCells": 12,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Investment real estate sale event",
+      "category": "Tax event",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Sale price",
+        "Basis",
+        "Depreciation",
+        "Selling costs"
+      ],
+      "outputs": [
+        "Capital gain",
+        "Recapture estimate",
+        "NIIT",
+        "State tax"
+      ],
+      "testFocus": "Define recapture precision requirements before building."
+    },
+    {
+      "name": "Oil and Gas",
+      "dimension": "A1:F24",
+      "populatedCells": 41,
+      "formulaCells": 11,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Oil and gas IDC strategy",
+      "category": "Strategy",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Working interest investment",
+        "IDC percentage",
+        "Tangible cost percentage",
+        "Participation"
+      ],
+      "outputs": [
+        "IDC deduction",
+        "First-year depreciation",
+        "Tax savings"
+      ],
+      "testFocus": "Specialized module; review risk and substantiation language before productizing."
+    },
+    {
+      "name": "UDTI and UBTI",
+      "dimension": "A1:F27",
+      "populatedCells": 49,
+      "formulaCells": 11,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Retirement account UBTI/UDTI estimator",
+      "category": "Informational",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Account type",
+        "Debt-financed income",
+        "Direct business income",
+        "Allocable deductions"
+      ],
+      "outputs": [
+        "Estimated UBIT tax",
+        "Informational warning"
+      ],
+      "testFocus": "Keep informational and separate from personal 1040 planning."
+    },
+    {
+      "name": "Installment sale and deferred s",
+      "dimension": "A1:F30",
+      "populatedCells": 52,
+      "formulaCells": 14,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "Installment sale event",
+      "category": "Tax event",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Sale price",
+        "Basis",
+        "Selling expenses",
+        "Principal received this year"
+      ],
+      "outputs": [
+        "Recognized gain",
+        "Deferred gain",
+        "This-year tax impact"
+      ],
+      "testFocus": "Later event module after capital gain engine is stable."
+    },
+    {
+      "name": "1031 exchange calculator",
+      "dimension": "A1:F29",
+      "populatedCells": 52,
+      "formulaCells": 13,
+      "validations": 1,
+      "mergedRanges": 6,
+      "module": "1031 exchange event",
+      "category": "Tax event",
+      "priority": "Future",
+      "status": "Backlog",
+      "inputs": [
+        "Relinquished sale price",
+        "Basis",
+        "Replacement price",
+        "Boot"
+      ],
+      "outputs": [
+        "Recognized gain",
+        "Deferred gain",
+        "New basis",
+        "Tax deferred"
+      ],
+      "testFocus": "Later event module; needs strong disclaimer and timeline checks."
+    },
+    {
+      "name": "IRC Code Support",
+      "dimension": "A1:F38",
+      "populatedCells": 201,
+      "formulaCells": 0,
+      "validations": 0,
+      "mergedRanges": 1,
+      "module": "Authority and caveat library",
+      "category": "Reference data",
+      "priority": "V1",
+      "status": "Needs review workflow",
+      "inputs": [
+        "Code references",
+        "IRS sources",
+        "Caveats",
+        "Last reviewed date"
+      ],
+      "outputs": [
+        "Report source notes",
+        "Advisor caveat text"
+      ],
+      "testFocus": "Kelly should identify missing authority and outdated or overly confident language."
+    },
+    {
+      "name": "Business Profile",
+      "dimension": "A1:L45",
+      "populatedCells": 247,
+      "formulaCells": 132,
+      "validations": 2,
+      "mergedRanges": 4,
+      "module": "Multi-entity client profile",
+      "category": "Client inputs",
+      "priority": "V1",
+      "status": "Needs formula port",
+      "inputs": [
+        "Business name",
+        "Tax bucket",
+        "YTD gross",
+        "YTD expenses",
+        "YTD net override"
+      ],
+      "outputs": [
+        "Schedule C rollup",
+        "K-1 rollup",
+        "C-corp tracking"
+      ],
+      "testFocus": "Validate that multiple businesses do not duplicate or incorrectly reclassify income."
+    },
+    {
+      "name": "QA Scenario Tests",
+      "dimension": "A1:U11",
+      "populatedCells": 116,
+      "formulaCells": 0,
+      "validations": 0,
+      "mergedRanges": 0,
+      "module": "Golden-master test suite",
+      "category": "Testing",
+      "priority": "V1",
+      "status": "Ready for expansion",
+      "inputs": [
+        "Workbook scenario rows",
+        "Expected output notes"
+      ],
+      "outputs": [
+        "Acceptance tests for formula port"
+      ],
+      "testFocus": "Kelly can add scenarios that must pass before the web engine is trusted."
+    }
+  ],
+  "qaScenarios": [
+    {
+      "scenario": "Owner 250K K-1 + 200K W-2 + SEP + Augusta + accountable",
+      "expected": "Expected: SEP 50K; Augusta 10.5K; accountable 10K; AGI 379.5K; QBI 45.9K; taxable 317.5K."
+    },
+    {
+      "scenario": "Payroll deferral sanity \u2014 200K gross, 50K entered in payroll retirement",
+      "expected": "Expected: W-2 Box 1 150K; Box 3/FICA approx 200K. Payroll deferral capacity caps at 24.5K for retirement/double-dip checks."
+    },
+    {
+      "scenario": "EBL cap stress \u2014 Single, 250K business, 700K depreciation",
+      "expected": "Expected: allowed dep 506K; disallowed/NOL 194K under 256K single threshold."
+    },
+    {
+      "scenario": "EBL cap stress \u2014 MFJ, 250K business, 700K depreciation",
+      "expected": "Expected: full 700K depreciation allowed; no EBL disallowance under 512K MFJ threshold."
+    }
+  ],
+  "reviewIssueUrl": "https://github.com/ec92009/kellyo/issues/1"
+}

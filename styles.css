@@ -78,7 +78,7 @@ textarea {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 22px;
   color: var(--soft-ink);
   font-size: 0.95rem;
 }
@@ -198,6 +198,12 @@ textarea {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.12);
+}
+
+.button.secondary.dark {
+  color: var(--ink);
+  border-color: var(--line);
+  background: #fff;
 }
 
 .hero-metrics {
@@ -547,7 +553,457 @@ textarea {
   font-size: 0.92rem;
 }
 
-@media (max-width: 900px) {
+.map-page,
+.owner-page {
+  background: var(--paper);
+}
+
+.map-hero,
+.owner-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.45fr);
+  gap: 32px;
+  align-items: stretch;
+  padding: 76px 32px 38px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.map-hero-copy,
+.owner-hero > div:first-child {
+  display: grid;
+  align-content: center;
+}
+
+.map-hero h1,
+.owner-hero h1 {
+  margin: 12px 0 18px;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.map-hero p,
+.owner-hero p,
+.gate-copy p,
+.owner-lock p,
+.owner-note p,
+.gated-workspace p,
+.locked-panels p {
+  color: var(--soft-ink);
+  line-height: 1.65;
+}
+
+.map-status-panel,
+.owner-mode,
+.owner-lock,
+.calc-gate,
+.gated-workspace,
+.owner-console {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.map-status-panel,
+.owner-mode {
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.map-status-panel h2,
+.owner-mode h2,
+.calc-gate h2,
+.gated-workspace h2,
+.owner-lock h2,
+.owner-toolbar h2 {
+  margin: 10px 0;
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  line-height: 1;
+}
+
+.gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.calc-gate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.55fr);
+  gap: 26px;
+  max-width: 1160px;
+  margin: 0 auto 28px;
+  padding: 28px;
+}
+
+.gate-form,
+.preview-form {
+  align-content: start;
+}
+
+.gate-form {
+  display: grid;
+  gap: 14px;
+}
+
+.gate-form label,
+.search-field {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.gate-form input,
+.gate-form select,
+.search-field input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: #fff;
+}
+
+.gate-message {
+  min-height: 24px;
+  margin: 0;
+  color: var(--soft-ink);
+  font-weight: 700;
+}
+
+.gated-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr);
+  gap: 24px;
+  max-width: 1160px;
+  margin: 0 auto 36px;
+  padding: 28px;
+}
+
+.gated-workspace.is-locked {
+  position: relative;
+  opacity: 0.68;
+}
+
+.gated-workspace.is-locked::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(23, 32, 29, 0.82);
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-weight: 900;
+  content: "Locked behind reviewer gate";
+  text-align: center;
+}
+
+.locked-panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.locked-panels article,
+.qa-grid article,
+.module-card,
+.scenario-list article,
+.owner-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.locked-panels article {
+  padding: 18px;
+}
+
+.locked-panels span,
+.qa-grid span,
+.scenario-list span {
+  color: var(--clay);
+  font-weight: 900;
+}
+
+.locked-panels h3 {
+  margin: 12px 0 6px;
+}
+
+.map-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 34px;
+  background: var(--line);
+}
+
+.map-summary div {
+  padding: 28px 32px;
+  background: #fff;
+}
+
+.map-summary span {
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+}
+
+.map-summary p {
+  margin: 8px 0 0;
+  color: var(--soft-ink);
+}
+
+.map-section {
+  padding-top: 74px;
+  padding-bottom: 74px;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.qa-grid article {
+  min-height: 220px;
+  padding: 22px;
+}
+
+.qa-grid h3,
+.module-card h3,
+.scenario-list h3,
+.owner-note h3 {
+  margin: 14px 0 8px;
+}
+
+.map-controls-heading {
+  align-items: start;
+}
+
+.map-controls {
+  display: grid;
+  gap: 14px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-chip {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: var(--soft-ink);
+  background: #fff;
+  cursor: pointer;
+}
+
+.filter-chip.is-active {
+  color: #fff;
+  border-color: var(--teal);
+  background: var(--teal);
+  font-weight: 800;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.module-card {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  box-shadow: 0 14px 42px rgba(23, 32, 29, 0.08);
+}
+
+.module-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.priority-badge,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.priority-badge {
+  color: var(--teal-dark);
+  background: var(--mist);
+}
+
+.status-badge.mapped,
+.status-badge.ready {
+  color: #fff;
+  background: var(--green);
+}
+
+.status-badge.needs {
+  color: #fff;
+  background: var(--clay);
+}
+
+.status-badge.backlog {
+  color: #fff;
+  background: var(--berry);
+}
+
+.module-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.module-stats div {
+  min-width: 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f7faf8;
+}
+
+.module-stats dt {
+  color: var(--soft-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.module-stats dd {
+  margin: 5px 0 0;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.io-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.io-grid h4 {
+  margin: 0 0 8px;
+}
+
+.io-grid ul {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+  margin: 0;
+  color: var(--soft-ink);
+}
+
+.test-focus {
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.scenario-list {
+  display: grid;
+  gap: 14px;
+}
+
+.scenario-list article {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  padding: 20px;
+}
+
+.scenario-list p {
+  color: var(--soft-ink);
+  line-height: 1.55;
+}
+
+.owner-hero {
+  padding-bottom: 28px;
+}
+
+.owner-lock,
+.owner-console {
+  max-width: 1160px;
+  margin: 0 auto 76px;
+  padding: 28px;
+}
+
+.owner-lock span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 10px;
+  color: #fff;
+  background: var(--berry);
+  font-weight: 900;
+}
+
+.owner-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.client-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.client-table {
+  width: 100%;
+  min-width: 940px;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.client-table th,
+.client-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.client-table th {
+  color: var(--soft-ink);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.client-table code,
+.owner-note code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+.owner-note {
+  margin-top: 18px;
+  padding: 18px;
+  background: #f7faf8;
+}
+
+@media (max-width: 1020px) {
   .site-header {
     grid-template-columns: 1fr auto;
     padding: 0 18px;
@@ -576,7 +1032,14 @@ textarea {
   .workspace-grid,
   .strategy-grid,
   .pricing-grid,
-  .preview {
+  .preview,
+  .map-hero,
+  .owner-hero,
+  .calc-gate,
+  .gated-workspace,
+  .map-summary,
+  .qa-grid,
+  .module-grid {
     grid-template-columns: 1fr;
   }
 
@@ -586,6 +1049,30 @@ textarea {
 
   .preview-copy {
     justify-self: start;
+  }
+
+  .map-hero,
+  .owner-hero {
+    padding: 54px 20px 28px;
+  }
+
+  .calc-gate,
+  .gated-workspace,
+  .owner-lock,
+  .owner-console {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .locked-panels,
+  .module-stats,
+  .io-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-toolbar {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 

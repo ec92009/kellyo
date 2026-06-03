@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KellyO | Owner Clients</title>
+    <meta
+      name="description"
+      content="Local-only KellyO owner console for reviewer and client access credentials."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="KellyO home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>KellyO</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./">Preview</a>
+        <a href="./map.html">Workbook Map</a>
+        <a href="./clients.html" aria-current="page">Clients</a>
+        <a href="https://github.com/ec92009/kellyo/issues/1" target="_blank" rel="noreferrer">Comments</a>
+      </nav>
+      <a class="nav-cta" href="./map.html#gate">Gate</a>
+    </header>
+
+    <main class="owner-page">
+      <section class="owner-hero">
+        <div>
+          <p class="eyebrow">Owner console</p>
+          <h1>Clients</h1>
+          <p>
+            A local-only control surface for the person running KellyO from localhost.
+            This page is designed for paywall test credentials and reviewer access notes,
+            not public browsing.
+          </p>
+        </div>
+        <div class="owner-mode" id="owner-mode">
+          <p class="mini-label">Access mode</p>
+          <h2 id="owner-mode-title">Checking host...</h2>
+          <p id="owner-mode-copy">Owner access is evaluated in the browser.</p>
+        </div>
+      </section>
+
+      <section class="owner-lock" id="owner-lock">
+        <span aria-hidden="true">Locked</span>
+        <h2>Owner-only local page.</h2>
+        <p>
+          Open this page from the local preview server, such as
+          <strong>http://localhost:8787/clients.html</strong>. The public GitHub Pages
+          version does not load credential data.
+        </p>
+      </section>
+
+      <section class="owner-console" id="owner-console" hidden>
+        <div class="owner-toolbar">
+          <div>
+            <p class="section-kicker">Local credentials</p>
+            <h2>Paywall test access</h2>
+          </div>
+          <button class="button primary" id="toggle-passwords" type="button">Show passwords</button>
+        </div>
+        <div class="client-table-wrap">
+          <table class="client-table">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Role</th>
+                <th>Tier</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="client-rows"></tbody>
+          </table>
+        </div>
+        <div class="owner-note">
+          <h3>Local data boundary</h3>
+          <p>
+            These entries are loaded from <code>site/data/owner-clients.local.json</code>,
+            which is ignored by Git and not published with the public site.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KellyO</span>
+      <span>Owner credentials are local-only.</span>
+      <span>Public visitors cannot load this table.</span>
+    </footer>
+
+    <script src="clients.js"></script>
+  </body>
+</html>
+
