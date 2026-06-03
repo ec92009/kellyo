@@ -12,7 +12,7 @@
     {
       id: 1,
       username: "Kelly",
-      password: "xxxxxx",
+      password: "OliBru",
       localOnly: false,
       label: "Client 1: Kelly",
     },
