@@ -1,5 +1,5 @@
 (function () {
-  const version = "v96.0";
+  const version = "v96.1";
 
   function bindVersionLabels() {
     document.querySelectorAll("[data-site-version]").forEach((label) => {

@@ -4,6 +4,12 @@
   const authBase = "/api/auth";
   const localHosts = new Set(["localhost", "127.0.0.1", "::1", "0.0.0.0"]);
   const isLocalHost = localHosts.has(window.location.hostname) || window.location.protocol === "file:";
+  const oauthErrorMessages = {
+    oauth_failed: "Provider sign-in did not complete. Try again or use temporary credentials.",
+    oauth_missing_code: "Provider sign-in did not return a code. Try again.",
+    oauth_not_allowed: "That Google or Microsoft account is not approved for KellyO yet.",
+    oauth_not_configured: "Google and Microsoft sign-in are not configured for this deployment yet.",
+  };
 
   function normalizeAccess(access) {
     if (!access || !access.username) return null;
@@ -167,6 +173,69 @@
     });
   }
 
+  async function loadAuthProviders() {
+    const response = await fetch(`${authBase}/providers`, {
+      cache: "no-store",
+      credentials: "same-origin",
+    });
+    if (!response.ok) throw new Error("Provider status unavailable.");
+    const data = await response.json();
+    if (!data.ok) throw new Error(data.error || "Provider status unavailable.");
+    return data.providers || {};
+  }
+
+  async function bindOAuthButtons(root, message) {
+    const buttons = [...root.querySelectorAll("[data-oauth-provider]")];
+    if (!buttons.length) return;
+
+    const query = new URLSearchParams(window.location.search);
+    const authError = query.get("auth_error");
+    if (authError && oauthErrorMessages[authError]) {
+      message.textContent = oauthErrorMessages[authError];
+    }
+
+    buttons.forEach((button) => {
+      button.disabled = true;
+      button.classList.add("is-disabled");
+    });
+
+    let providers = {};
+    try {
+      providers = await loadAuthProviders();
+    } catch {
+      if (!authError) {
+        message.textContent = "Google and Microsoft sign-in activate on the secure Cloudflare deployment.";
+      }
+      return;
+    }
+
+    let configuredCount = 0;
+    buttons.forEach((button) => {
+      const provider = button.dataset.oauthProvider;
+      const isConfigured = Boolean(providers[provider]?.configured);
+      configuredCount += isConfigured ? 1 : 0;
+      button.disabled = !isConfigured;
+      button.classList.toggle("is-disabled", !isConfigured);
+      button.title = isConfigured
+        ? `Continue with ${providers[provider]?.label || provider}`
+        : `${providers[provider]?.label || provider} sign-in is not configured yet`;
+      if (button.dataset.boundOauthProvider) return;
+      button.dataset.boundOauthProvider = "true";
+      button.addEventListener("click", () => {
+        if (button.disabled) {
+          message.textContent = button.title;
+          return;
+        }
+        const next = new URLSearchParams(window.location.search).get("next") || "map";
+        window.location.assign(`${authBase}/oauth/start?provider=${encodeURIComponent(provider)}&next=${encodeURIComponent(next)}`);
+      });
+    });
+
+    if (!configuredCount && !authError) {
+      message.textContent = "Google and Microsoft sign-in are ready in code and waiting on provider credentials.";
+    }
+  }
+
   async function bindGate(options = {}) {
     const form = document.getElementById(options.formId || "gate-form");
     const message = document.getElementById(options.messageId || "gate-message");
@@ -180,16 +249,19 @@
     const gateCopy = gateSection?.querySelector(".gate-copy p:not(.section-kicker)");
     if (!form || !message || !workspace || !workspaceCopy) return;
     bindPasswordToggles(form);
+    bindOAuthButtons(form, message);
 
     const defaultGateTitle = gateTitle?.textContent || "";
     const defaultGateCopy = gateCopy?.textContent || "";
+    const authError = new URLSearchParams(window.location.search).get("auth_error");
+    const lockedDefaultMessage = oauthErrorMessages[authError] || "Client username and password required.";
     const next = new URLSearchParams(window.location.search).get("next");
     const successRedirectUrl = options.successRedirectUrl || "./map.html";
     if (successLink && next === "map") {
       successLink.setAttribute("href", "./map.html");
     }
 
-    function applyLockedState(text = "Client username and password required.") {
+    function applyLockedState(text = lockedDefaultMessage) {
       if (gateSection) gateSection.classList.remove("is-signed-in");
       if (gateTitle) gateTitle.textContent = defaultGateTitle;
       if (gateCopy) gateCopy.textContent = defaultGateCopy;
