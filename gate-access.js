@@ -1,47 +1,38 @@
 (function () {
   const accessKey = "kellyo-client-access";
   const kellyNotesKey = "kellyo-kelly-review-notes";
-  const defaultClientCredentials = [
-    {
-      id: 0,
-      username: "localhost",
-      password: "",
-      localOnly: true,
-      label: "Client 0: Owner localhost",
-    },
-    {
-      id: 1,
-      username: "Kelly",
-      password: "OliBru",
-      localOnly: false,
-      label: "Client 1: Kelly",
-    },
-    {
-      id: 2,
-      username: "Jerry",
-      password: "OliBru",
-      localOnly: false,
-      label: "Client 2: Jerry",
-    },
-  ];
+  const authBase = "/api/auth";
   const localHosts = new Set(["localhost", "127.0.0.1", "::1", "0.0.0.0"]);
   const isLocalHost = localHosts.has(window.location.hostname) || window.location.protocol === "file:";
+
+  function normalizeAccess(access) {
+    if (!access || !access.username) return null;
+    return {
+      username: String(access.username),
+      label: String(access.label || access.username),
+      role: String(access.role || "Client"),
+      grantedAt: access.grantedAt || new Date().toISOString(),
+      serverVerified: true,
+    };
+  }
 
   function getAccess() {
     try {
       const raw = window.sessionStorage.getItem(accessKey);
-      return raw ? JSON.parse(raw) : null;
+      const access = raw ? JSON.parse(raw) : null;
+      if (!access?.serverVerified) {
+        clearAccess();
+        return null;
+      }
+      return normalizeAccess(access);
     } catch {
       return null;
     }
   }
 
   function setAccess(client) {
-    const access = {
-      username: client.username,
-      label: client.label,
-      grantedAt: new Date().toISOString(),
-    };
+    const access = normalizeAccess(client);
+    if (!access) return null;
     try {
       window.sessionStorage.setItem(accessKey, JSON.stringify(access));
     } catch {
@@ -56,6 +47,55 @@
     } catch {
       return;
     }
+  }
+
+  async function authFetch(path, options = {}) {
+    const response = await fetch(`${authBase}${path}`, {
+      cache: "no-store",
+      credentials: "same-origin",
+      ...options,
+      headers: {
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
+        ...(options.headers || {}),
+      },
+    });
+    let data = {};
+    try {
+      data = await response.json();
+    } catch {
+      data = {};
+    }
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.error || "Secure sign-in is not available yet.");
+    }
+    return data;
+  }
+
+  async function fetchSession() {
+    const data = await authFetch("/session");
+    const access = setAccess(data.access);
+    if (!access) throw new Error("No active session.");
+    return access;
+  }
+
+  async function login(username, password) {
+    const data = await authFetch("/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+    const access = setAccess(data.access);
+    if (!access) throw new Error("Sign-in did not return a session.");
+    return access;
+  }
+
+  async function logout(logoutUrl) {
+    try {
+      await authFetch("/logout", { method: "POST" });
+    } catch {
+      // Clear the browser display state even if a static preview has no API.
+    }
+    clearAccess();
+    window.location.assign(logoutUrl || "./gate.html");
   }
 
   function isKellyAccess(access) {
@@ -101,34 +141,6 @@
     return panel;
   }
 
-  async function loadCredentials() {
-    if (!isLocalHost) return defaultClientCredentials;
-    try {
-      const response = await fetch("/api/owner/clients", { cache: "no-store" });
-      if (!response.ok) return defaultClientCredentials;
-      const data = await response.json();
-      const localClients = (data.clients || []).map((client, index) => ({
-        id: index,
-        username: String(client.username || ""),
-        password: String(client.password || ""),
-        localOnly: String(client.username || "").toLowerCase() === "localhost",
-        label: `${client.name}: ${client.role}`,
-      }));
-      return localClients.length ? localClients : defaultClientCredentials;
-    } catch {
-      return defaultClientCredentials;
-    }
-  }
-
-  function findMatchedClient(clientCredentials, username, password) {
-    return clientCredentials.find((client) => {
-      if (client.localOnly) {
-        return isLocalHost && username.toLowerCase() === client.username.toLowerCase() && password === client.password;
-      }
-      return username === client.username && password === client.password;
-    });
-  }
-
   function bindPasswordToggles(root = document) {
     root.querySelectorAll("[data-password-toggle]").forEach((button) => {
       if (button.dataset.boundPasswordToggle) return;
@@ -163,7 +175,7 @@
     const successTarget = document.querySelector(options.successSelector || "[data-gate-success]");
     const successLink = document.getElementById(options.successLinkId || "enter-paywall");
     const trialTarget = document.querySelector(options.trialSelector || "[data-trial-cta]");
-    const gateSection = form.closest(".calc-gate");
+    const gateSection = form?.closest(".calc-gate");
     const gateTitle = document.getElementById(options.titleId || "gate-title");
     const gateCopy = gateSection?.querySelector(".gate-copy p:not(.section-kicker)");
     if (!form || !message || !workspace || !workspaceCopy) return;
@@ -171,11 +183,21 @@
 
     const defaultGateTitle = gateTitle?.textContent || "";
     const defaultGateCopy = gateCopy?.textContent || "";
-    const clientCredentials = await loadCredentials();
     const next = new URLSearchParams(window.location.search).get("next");
     const successRedirectUrl = options.successRedirectUrl || "./map.html";
     if (successLink && next === "map") {
       successLink.setAttribute("href", "./map.html");
+    }
+
+    function applyLockedState(text = "Client username and password required.") {
+      if (gateSection) gateSection.classList.remove("is-signed-in");
+      if (gateTitle) gateTitle.textContent = defaultGateTitle;
+      if (gateCopy) gateCopy.textContent = defaultGateCopy;
+      message.textContent = text;
+      workspace.classList.add("is-locked");
+      if (successTarget) successTarget.hidden = true;
+      if (trialTarget) trialTarget.hidden = false;
+      updateKellyReviewPanel(null);
     }
 
     function applyAccessState(access, shouldScroll = false) {
@@ -194,37 +216,46 @@
       }
     }
 
-    const existingAccess = getAccess();
-    if (existingAccess) {
+    try {
+      const existingAccess = await fetchSession();
       applyAccessState(existingAccess);
-    } else {
-      if (gateSection) gateSection.classList.remove("is-signed-in");
-      updateKellyReviewPanel(null);
+    } catch {
+      applyLockedState();
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const formData = new FormData(form);
       const username = String(formData.get("username") || "").trim();
       const password = String(formData.get("password") || "");
-      const matched = findMatchedClient(clientCredentials, username, password);
-      if (!matched) {
-        if (gateSection) gateSection.classList.remove("is-signed-in");
-        if (gateTitle) gateTitle.textContent = defaultGateTitle;
-        if (gateCopy) gateCopy.textContent = defaultGateCopy;
-        message.textContent = "Client access is closed. Valid username and password required.";
-        workspace.classList.add("is-locked");
-        if (successTarget) successTarget.hidden = true;
-        if (trialTarget) trialTarget.hidden = false;
-        updateKellyReviewPanel(null);
+      if (!username || !password) {
+        applyLockedState("Enter the assigned username and password.");
         return;
       }
-      const access = setAccess(matched);
-      if (options.redirectOnSuccess !== false) {
-        window.location.assign(successRedirectUrl);
-        return;
+
+      const submitButton = form.querySelector("[type='submit']");
+      const originalText = submitButton?.textContent || "";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Checking";
       }
-      applyAccessState(access, true);
+      message.textContent = "Checking credentials securely...";
+
+      try {
+        const access = await login(username, password);
+        if (options.redirectOnSuccess !== false) {
+          window.location.assign(successRedirectUrl);
+          return;
+        }
+        applyAccessState(access, true);
+      } catch (error) {
+        applyLockedState(error.message || "Client access is closed. Valid username and password required.");
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+      }
     });
   }
 
@@ -242,14 +273,12 @@
       link.dataset.boundAccessLogout = "true";
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        clearAccess();
-        window.location.assign(logoutUrl);
+        logout(logoutUrl);
       });
     });
   }
 
-  function bindAccountMenu(options = {}) {
-    const access = getAccess();
+  function renderAccountMenu(access, options = {}) {
     const logoutUrl = options.logoutUrl || "./gate.html";
     bindSignedInClientCtas(access, logoutUrl);
 
@@ -275,34 +304,53 @@
       panel.hidden = true;
     }
 
-    toggle.addEventListener("click", () => {
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      panel.hidden = isOpen;
-    });
+    if (!menu.dataset.boundAccountMenu) {
+      menu.dataset.boundAccountMenu = "true";
+      toggle.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+        panel.hidden = isOpen;
+      });
 
-    logoutButton.addEventListener("click", () => {
+      logoutButton.addEventListener("click", () => logout(logoutUrl));
+
+      document.addEventListener("click", (event) => {
+        if (!menu.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+    }
+  }
+
+  async function bindAccountMenu(options = {}) {
+    const cachedAccess = getAccess();
+    renderAccountMenu(cachedAccess, options);
+    try {
+      renderAccountMenu(await fetchSession(), options);
+    } catch {
       clearAccess();
-      window.location.assign(logoutUrl);
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!menu.contains(event.target)) closeMenu();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
+      renderAccountMenu(null, options);
+    }
   }
 
   function requireAccess(options = {}) {
-    const access = getAccess();
-    if (access) {
+    const cachedAccess = getAccess();
+    if (cachedAccess) {
       document.body.classList.remove("is-access-pending");
-      return access;
     }
-    window.location.replace(options.redirectUrl || "./gate.html?next=map");
-    return null;
+
+    fetchSession()
+      .then(() => {
+        document.body.classList.remove("is-access-pending");
+      })
+      .catch(() => {
+        clearAccess();
+        window.location.replace(options.redirectUrl || "./gate.html?next=map");
+      });
+
+    return cachedAccess;
   }
 
   window.KellyOGateAccess = {
@@ -310,9 +358,11 @@
     bindGate,
     bindPasswordToggles,
     clearAccess,
+    fetchSession,
     getAccess,
     isLocalHost,
-    loadCredentials,
+    login,
+    logout,
     requireAccess,
   };
 }());
